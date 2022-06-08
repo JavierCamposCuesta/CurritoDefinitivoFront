@@ -1,0 +1,107 @@
+<!-- <div class="w-100 d-flex row">
+ 
+  <div class="col-12 col-lg-8 profileAdaptermd profileAdapterlg" > -->
+    <h2 class="pt-5 mb-0 mb-3 ms-5">Mis Currito's solicitados</h2>
+
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Solicitados</button>
+        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Realizados</button>
+       </div>
+    </nav>
+
+    <div class="tab-content" id="nav-tabContent">
+
+      <!-- Tabla para mostrar mis anuncios -->
+       <!-- Esta tabla es para anuncios terminados -->
+       <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <p-table #dt2 [value]="listaMisAnunciosSolicitados" responsiveLayout="stack" breakpoint="815px" [paginator]="true" [rows]="10" [showCurrentPageReport]="false" 
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5,10,20]" [globalFilterFields]="['listaCategorias.nombre']">        
+        
+        
+          <ng-template pTemplate="header" let-columns>
+              <tr>
+                  <th></th>
+                  <th pSortableColumn="titulo">Título <p-sortIcon field="titulo"></p-sortIcon></th>
+                  <th pSortableColumn="categoria">Categoría <p-sortIcon field="categoria"></p-sortIcon></th>
+                  <th pSortableColumn="precio">Precio <p-sortIcon field="precio"></p-sortIcon></th>
+                  <th pSortableColumn="tipoPrecio">Tipo precio <p-sortIcon field="precio"></p-sortIcon></th>
+                  <th pSortableColumn="fechaAnuncio">Fecha publicación<p-sortIcon field="fechaAnuncio"></p-sortIcon></th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-anuncio let-columns="anuncio">
+              <tr>
+                <td *ngIf="getImage(anuncio.file)== null"><img src="../../../assets/img/default.png" alt="Imagen" width="70" style="margin: -20px; padding: -20px; margin-left: 10px;" /></td>
+                <td *ngIf="getImage(anuncio.file)!= null"><img src={{getImage(anuncio.file)}} alt="Imagen" width="70" style="margin: -20px; padding: -20px; margin-left: 10px;" /></td>
+                  <td [routerLink]="['/anuncio-detalle', anuncio.id]" class='textoConPuntos ' ><span class="p-column-title" pSortableColumn="titulo"><strong>Título</strong></span>{{anuncio.titulo}}</td>
+                  <td [routerLink]="['/anuncio-detalle', anuncio.id]"><span class="p-column-title" pSortableColumn="categoria"><strong>Categoría</strong></span>{{anuncio.categoria}}</td>
+                  <td [routerLink]="['/anuncio-detalle', anuncio.id]"><span class="p-column-title" pSortableColumn="precio"><strong>Precio</strong></span>{{anuncio.precio}} €</td>
+                  <td [routerLink]="['/anuncio-detalle', anuncio.id]"><span class="p-column-title" pSortableColumn="precio"><strong>Tipo precio</strong></span>{{anuncio.tipoPrecio}}</td>
+                  <td [routerLink]="['/anuncio-detalle', anuncio.id]" style="overflow: hidden;"><span class="p-column-title" pSortableColumn="fechaAnuncio"><strong>Fecha publicación</strong></span>{{anuncio.fechaAnuncio?.slice(0,10)}}</td>
+                  
+              </tr>
+          </ng-template>
+          
+        </p-table>
+
+        <!-- Mensaje que se mostrará si no hay ningún currito solicitado -->
+        <div *ngIf="this.listaMisAnunciosSolicitados.length == 0" class="w-100 text-center navy mt-5">
+            <p>Aún no has solicitado ningún currito</p>
+        </div>
+
+      </div>
+
+
+
+
+      <!-- Esta tabla es para anuncios terminados -->
+      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <p-table #dt2 [value]="listaMisAnunciosRealizados" responsiveLayout="stack" breakpoint="815px" [paginator]="true" [rows]="10" [showCurrentPageReport]="false" 
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5,10,20]" [globalFilterFields]="['listaCategorias.nombre']">        
+        
+        
+          <ng-template pTemplate="header" let-columns>
+              <tr>
+                  <th></th>
+                  <th pSortableColumn="titulo">Título <p-sortIcon field="titulo"></p-sortIcon></th>
+                  <th pSortableColumn="categoria">Categoría <p-sortIcon field="categoria"></p-sortIcon></th>
+                  <th pSortableColumn="precio">Precio <p-sortIcon field="precio"></p-sortIcon></th>
+                  <th pSortableColumn="tipoPrecio">Tipo precio <p-sortIcon field="tipoPrecio"></p-sortIcon></th>
+                  <th pSortableColumn="fechaAnuncio">Fecha publicación<p-sortIcon field="fechaAnuncio"></p-sortIcon></th>
+                  <th pSortableColumn="fechaFin">Fecha realización<p-sortIcon field="fechaFin"></p-sortIcon></th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-anuncio let-columns="anuncio">
+              <tr>
+                <td *ngIf="getImage(anuncio.file)== null"><img src="../../../assets/img/default.png" alt="Imagen" width="70" style="margin: -20px; padding: -20px; margin-left: 10px;" /></td>
+                <td *ngIf="getImage(anuncio.file)!= null"><img src={{getImage(anuncio.file)}} alt="Imagen" width="70" style="margin: -20px; padding: -20px; margin-left: 10px;" /></td>
+                  <td [routerLink]="['/anuncio-detalle', anuncio.id]" class='textoConPuntos ' ><span class="p-column-title" pSortableColumn="titulo"><strong>Título</strong></span>{{anuncio.titulo}}</td>
+                  <td [routerLink]="['/anuncio-detalle', anuncio.id]"><span class="p-column-title" pSortableColumn="categoria"><strong>Categoría</strong></span>{{anuncio.categoria}}</td>
+                  <td [routerLink]="['/anuncio-detalle', anuncio.id]"><span class="p-column-title" pSortableColumn="precio"><strong>Precio</strong></span>{{anuncio.precio}} €</td>
+                  <td [routerLink]="['/anuncio-detalle', anuncio.id]"><span class="p-column-title" pSortableColumn="tipoPrecio"><strong>Tipo precio</strong></span>{{anuncio.tipoPrecio}}</td>
+                  <td [routerLink]="['/anuncio-detalle', anuncio.id]" style="overflow: hidden;"><span class="p-column-title" pSortableColumn="fechaAnuncio"><strong>Fecha Publicación</strong></span>{{anuncio.fechaAnuncio?.slice(0,10)}}</td>
+                  <td [routerLink]="['/anuncio-detalle', anuncio.id]" style="overflow: hidden;"><span class="p-column-title" pSortableColumn="fechaFin"><strong>Fecha Realización</strong></span>{{anuncio.fechaFin?.slice(0,10)}}</td>
+              </tr>
+          </ng-template>
+          
+        </p-table>
+
+         <!-- Mensaje que se mostrará si no hay ningún currito realizado -->
+         <div *ngIf="this.listaMisAnunciosRealizados.length == 0" class="w-100 text-center navy mt-5">
+            <p>Aún no has realizado ningún currito</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Este es el mensaje cuando se clickea el boton de borrar anuncio -->
+    <p-toast position="bottom-center" ></p-toast>
+    
+
+  
+
+    
+  <!-- </div>
+</div> -->
+
+

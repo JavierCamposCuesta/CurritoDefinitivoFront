@@ -1,0 +1,186 @@
+<!-- <div class="w-100 d-flex row">
+ 
+  <div class="col-12 col-lg-8 profileAdaptermd profileAdapterlg" > -->
+    <h2 class="pt-5 mb-0 mb-3 ms-5">Mis Currito's</h2>
+
+
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Pendientes</button>
+        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Terminados</button>
+       </div>
+    </nav>
+
+    <div class="tab-content" id="nav-tabContent">
+
+      <!-- Tabla para mostrar mis anuncios -->
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <!-- Data table para mayores de lg -->
+        <p-table #dt2 [value]="listaMisAnuncios" responsiveLayout="stack" breakpoint="815px" [paginator]="true" [rows]="10" [showCurrentPageReport]="false" 
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5,10,20]" [globalFilterFields]="['listaCategorias.nombre']">        
+        
+        
+          <ng-template pTemplate="header" let-columns>
+              <tr>
+                  <th></th>
+                  <th pSortableColumn="titulo">Título <p-sortIcon field="titulo"></p-sortIcon></th>
+                  <th pSortableColumn="categoria">Categoría <p-sortIcon field="categoria"></p-sortIcon></th>
+                  <!-- <p-columnFilter field="listaCategorias.nombre" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                            <ng-template let-option pTemplate="item">
+                                <span [class]="'customer-badge categoria-' + option">{{option.nombre}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </ng-template>
+                </p-columnFilter> -->
+                  <th pSortableColumn="precio">Precio <p-sortIcon field="precio"></p-sortIcon></th>
+                  <th pSortableColumn="fechaAnuncio">Fecha <p-sortIcon field="fechaAnuncio"></p-sortIcon></th>
+                  <th>Editar</th>
+                  <th>Borrar</th>
+                  <th>Finalizado</th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-anuncio let-columns="anuncio">
+              <tr>
+                <td *ngIf="getImage(anuncio.file)== null"><img src="../../../assets/img/default.png" alt="Imagen" width="70" style="margin: -20px; padding: -20px; margin-left: 10px;" /></td>
+                <td *ngIf="getImage(anuncio.file)!= null"><img src={{getImage(anuncio.file)}} alt="Imagen" width="70" style="margin: -20px; padding: -20px; margin-left: 10px;" /></td>
+                  <td [routerLink]="['/anuncio-detalle', anuncio.id]" class='textoConPuntos ' ><span class="p-column-title" pSortableColumn="titulo"><strong>Título</strong></span>{{anuncio.titulo}}</td>
+                  <td [routerLink]="['/anuncio-detalle', anuncio.id]"><span class="p-column-title" pSortableColumn="categoria"><strong>Categoría</strong></span>{{anuncio.categoria}}</td>
+                  <td [routerLink]="['/anuncio-detalle', anuncio.id]"><span class="p-column-title" pSortableColumn="precio"><strong>Precio</strong></span>{{anuncio.precio}} €</td>
+                  <td [routerLink]="['/anuncio-detalle', anuncio.id]" style="overflow: hidden;"><span class="p-column-title" pSortableColumn="fechaAnuncio"><strong>Fecha</strong></span>{{anuncio.fechaAnuncio?.slice(0,10)}}</td>
+                  <td class="ocultarMenor680" (click)="seleccionarEventoEditar(anuncio)"><span class="p-column-title " >Editar</span><a class="btn"><i class="bi bi-pencil-fill focusEditar"></i></a></td>
+                  <td class="ocultarMenor680" (click)="confirm1(anuncio.id)"><span class="p-column-title ">Borrar</span><a class="btn"><i class="bi bi-trash-fill focusBorrar"></i></a></td>
+
+                  <td class="ocultarMenor680" (click)="showBasicDialog2(anuncio.id)"><span class="p-column-title ">Finalizado</span><a class="btn"><i class="bi bi-check2-square focusFinalizado">
+                  </i></a></td>
+                  <td class=" justify-content-evenly ocultarMayor679">
+                    <a class="btn fs-5" (click)="seleccionarEventoEditar(anuncio)"><i class="bi bi-pencil-fill focusEditar"></i></a>
+                    <a class="btn fs-5" (click)="borrarAnuncio(anuncio.id)"><i class="bi bi-trash-fill focusBorrar"></i></a>
+                    <a class="btn fs-5" (click)="showBasicDialog2(anuncio.id)"><i class="bi bi-check2-square focusFinalizado"></i></a>
+                  </td>
+              </tr>
+
+              <!-- Dialogo para indicar el que ha realizado el anuncio -->
+              <p-dialog [(visible)]="displayBasic2"  [responsive]="true" position='center' [style]="{width: '40vw'}">
+                <h5 class="text-center mt-0 pt-0" *ngIf="this.listaSolicitantes.length ==0; ">Ningún usuario ha solicitado el anuncio</h5>
+                <h5 class="text-center mt-0 pt-0" style="margin-top: -80px; padding-top: -50px;" *ngIf="this.listaSolicitantes.length >0;">¿Qué usuario ha realizado el anuncio?</h5>
+              
+                  <!-- borrar -  forma antigua de hacerlo, lo dejo de muestra -->
+                  <!-- <li class="solicitante text-center" *ngFor="let solicitante of listaSolicitantes" (click)="finalizarAnuncio(anuncio.id)" (click)="solicitanteAddAnuncio(anuncio.id, solicitante.email)">
+                    {{solicitante.nombre}} {{solicitante.apellidos}}
+                  </li> -->
+                  <li class="solicitante text-center" *ngFor="let solicitante of listaSolicitantes" (click)="showDialogoComentario(anuncio, solicitante)">
+                    {{solicitante.nombre}} {{solicitante.apellidos}}
+                  </li>
+                
+              
+                
+                <ng-template pTemplate="footer">
+                    <p-button icon="pi pi-times" (click)="closeBasicDialog2()" label="Cerrar" styleClass="p-button-text"></p-button>
+                </ng-template>
+              </p-dialog>
+              <!-- Fin dialogo -->
+
+              
+            </ng-template>
+
+          </p-table>
+
+          <!-- Dialogo para añadir un comentario al usuario que realiza el trabajo -->
+          <p-dialog [(visible)]="dialogoComentario"  [responsive]="true" position='center' [style]="{width: '60vw'}" [baseZIndex]="10000">
+            <h3 class="text-center mt-0 pt-0" style="margin-top: -100px; padding-top: -50px;  margin-bottom: 30px;">¿Cómo ha sido tu experiencia con {{solicitante.nombre}} {{solicitante.apellidos}}?</h3>
+
+              <form autocomplete="off"  [formGroup]="formComentario" (ngSubmit) = "submitComentario(anuncioComentar.id!, solicitante.email!)"  class="row g-3">
+              
+                <div class="col-md-12 text-center">
+                  <h5 class="text-center mt-0 pt-0" style="margin-top: -100px; padding-top: -50px;">Puntúa tu experencia</h5>
+
+                <p-rating formControlName="puntuacionEstrellas" [cancel]="false"></p-rating>
+
+                <h5 class="text-center mt-2 pt-0" >Cuéntanos que tal ha ido</h5>
+                <textarea class="col-12 mb-4" formControlName="textoComentario" placeholder="Escribe un breve resumen de tu experiencia"></textarea>
+                <button class="btn btn-primary btn-lg btn-block w-50 ms-auto me-auto" type="submit" [disabled]="!formComentario.valid">Valorar</button>
+              </div>
+              <div>
+                <h5 style="margin-bottom: 0px; margin-top: 50px; text-align: center; color: rgb(173, 173, 173);">Si no haces una valoración no podrás finalizar el anuncio</h5>
+              </div>
+
+                 
+            </form>
+          
+            
+            <ng-template pTemplate="footer">
+                <p-button icon="pi pi-times" (click)="closeBasicDialog2()" label="Cerrar" styleClass="p-button-text"></p-button>
+            </ng-template>
+          </p-dialog>
+          <!-- Fin dialogo -->
+
+        <!-- Mensaje que se mostrará si no hay ningún currito publicado -->
+        <div *ngIf="this.listaMisAnuncios.length == 0" class="w-100 text-center navy mt-5">
+          <p>Aún no has publicado ningún currito</p>
+      </div>
+
+      </div>
+
+
+
+
+      <!-- Esta bla es para anuncios terminados -->
+      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <p-table [value]="listaMisAnunciosTerminados" [rows]="10" responsiveLayout="stack" breakpoint="750px" [paginator]="true" [rowsPerPageOptions]="[5,10,20]">        
+          <!-- <ng-template pTemplate="caption">
+            Stack
+          </ng-template> -->
+          <ng-template pTemplate="header" let-columns>
+              <tr>
+                  <th></th>
+                  <th pSortableColumn="titulo">Título <p-sortIcon field="titulo"></p-sortIcon></th>
+                  <th pSortableColumn="categoria">Categoría <p-sortIcon field="categoria"></p-sortIcon></th>
+                  <th pSortableColumn="precio">Precio <p-sortIcon field="precio"></p-sortIcon></th>
+                  <th pSortableColumn="fechaAnuncio">Fecha inicio<p-sortIcon field="fechaAnuncio"></p-sortIcon></th>
+                  <th pSortableColumn="fechaAnuncio">Fecha fin<p-sortIcon field="fechaAnuncio"></p-sortIcon></th>
+                  
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-anuncioTerminado let-columns="anuncio">
+              <tr>
+                <td *ngIf="getImage(anuncioTerminado.file)== null"><img src="../../../assets/img/default.png" alt="Imagen" width="70" style="margin: -20px; padding: -20px; margin-left: 10px;" /></td>
+                <td *ngIf="getImage(anuncioTerminado.file)!= null"><img src={{getImage(anuncioTerminado.file)}} alt="Imagen" width="70" style="margin: -20px; padding: -20px; margin-left: 10px;" /></td>
+                  <td ><span class="p-column-title" pSortableColumn="titulo"><strong>Título</strong></span>{{anuncioTerminado.titulo}}</td>
+                  <td><span class="p-column-title" pSortableColumn="categoria"><strong>Categoría</strong></span>{{anuncioTerminado.categoria}}</td>
+                  <td><span class="p-column-title" pSortableColumn="precio"><strong>Precio</strong></span>{{anuncioTerminado.precio}} €</td>
+                  <td><span class="p-column-title" pSortableColumn="fechaAnuncio"><strong>Fecha creación</strong></span>{{anuncioTerminado.fechaAnuncio?.slice(0,10)}}</td>
+                  <td><span class="p-column-title" pSortableColumn="fechaFin"><strong>Fecha fin</strong></span>{{anuncioTerminado.fechaFin?.slice(0,10)}}</td>
+                  
+              </tr>
+          </ng-template>
+        </p-table>
+
+        <!-- Mensaje que se mostrará si no hay ningún currito que te hayan realizado -->
+        <div *ngIf="this.listaMisAnunciosTerminados.length == 0" class="w-100 text-center navy mt-5">
+          <p>Aún no te han realizado ningún currito</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Este es el mensaje cuando se clickea el boton de borrar anuncio -->
+    <p-toast position="bottom-center" ></p-toast>
+    
+   
+
+<!-- Mensaje de confirmacion para borrado -->
+    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+
+<!-- Mostramos un dialogo con el formulario de añadir anuncio ya relleno para modificar los datos -->
+  <p-dialog [(visible)]="dialogoVisible">
+    
+    <app-add-currito [edit]="true" [anuncioEditar]="anuncioSeleccionado" (recargarListado)="misAnuncios()"></app-add-currito>
+      
+  </p-dialog>
+  <!-- </div>
+
+    
+</div> -->
+

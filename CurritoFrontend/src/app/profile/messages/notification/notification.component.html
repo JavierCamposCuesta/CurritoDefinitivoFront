@@ -1,0 +1,59 @@
+<div class="tab-content" id="nav-tabContent">
+
+    <!-- Tabla para mostrar mis anuncios -->
+     <!-- Esta tabla es para anuncios terminados -->
+     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      <div *ngFor="let comentario of this.listaComentariosPendientes" class="card mb-3" style="max-width: 100%;" >
+          
+            <div class="row g-0" (click)="showDialogoComentario()">
+                <!-- <div class="col-md-1">
+                  <img *ngIf="getImage(opinion.anuncio!.file!)== null" src="../../../assets/img/default.png" class="img-fluid rounded-start" alt="...">
+                  <img *ngIf="getImage(opinion.anuncio!.file!)!= null" src={{getImage(opinion.anuncio!.file!)}} class="img-fluid rounded-start" alt="...">
+  
+                </div> -->
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <p *ngIf="comentario.realizaste == true" class="card-text mb-0"><small class="text-muted">Evalua al trabajador</small></p>
+                    <p *ngIf="comentario.realizaste == false" class="card-text mb-0"><small class="text-muted">Evalua al ofertante</small></p>
+  
+                    <h5 class="card-title">Evalua a {{comentario.usuarioComentado?.nombre}} {{comentario.usuarioComentado?.apellidos}} por ofrecerte el Currito {{comentario.anuncio?.titulo}}</h5>
+                  </div>
+                </div>
+              </div>
+          
+              <!-- Dialogo para añadir un comentario al usuario que realiza el trabajo -->
+              <p-dialog [(visible)]="dialogoComentario"  [responsive]="true" position='center' [style]="{width: '60vw'}" [baseZIndex]="10000">
+                <h3 class="text-center mt-0 pt-0" style="margin-top: -100px; padding-top: -50px;  margin-bottom: 30px;">¿Cómo ha sido tu experiencia con {{comentario.usuarioComentado?.nombre}} {{comentario.usuarioComentado?.apellidos}}?</h3>
+      
+                  <form autocomplete="off"  [formGroup]="formComentario" (ngSubmit) = "submitComentario(comentario.id!)"  class="row g-3">
+                  
+                    <div class="col-md-12 text-center">
+                      <h5 class="text-center mt-0 pt-0" style="margin-top: -100px; padding-top: -50px;">Puntúa tu experencia</h5>
+      
+                    <p-rating formControlName="puntuacionEstrellas" [cancel]="false"></p-rating>
+      
+                    <h5 class="text-center mt-2 pt-0" >Cuéntanos que tal ha ido</h5>
+                    <textarea class="col-12 mb-4" formControlName="textoComentario" placeholder="Escribe un breve resumen de tu experiencia"></textarea>
+                    <button class="btn btn-primary btn-lg btn-block w-50 ms-auto me-auto" type="submit" [disabled]="!formComentario.valid">Valorar</button>
+                  </div>
+                  
+      
+                     
+                </form>
+              
+                
+                <ng-template pTemplate="footer">
+                    <p-button icon="pi pi-times"  label="Cerrar" styleClass="p-button-text"></p-button>
+                </ng-template>
+              </p-dialog>
+              <!-- Fin dialogo -->
+        </div>
+
+  
+      <!-- Mensaje que se mostrará si no hay ningún currito solicitado -->
+      <div *ngIf="this.listaComentariosPendientes.length == 0" class="w-100 text-center navy mt-5">
+          <p>No tienes notificaciones pendientes</p>
+      </div>
+  
+    </div>
+  </div>

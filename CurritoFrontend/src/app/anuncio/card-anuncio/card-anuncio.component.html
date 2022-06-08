@@ -1,0 +1,226 @@
+
+  <!-- Filtros para movil -->
+
+  <div class="d-block d-sm-none d-md-none d-lg-none">
+    <button class="btn navy" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="bi bi-funnel-fill"></i>Filtros</button>
+
+    <div class="offcanvas offcanvas-start" data-bs-scroll="true" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+      <div class="offcanvas-header">
+        <div class="offcanvas-title d-flex navy" id="offcanvasWithBackdropLabel">
+          <i class="bi bi-funnel-fill navy"></i>
+          <h5 class="navy">Filtros de búsqueda</h5>
+        </div>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body navy">
+        <div id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown rounded-3">
+              <a class="nav-link dropdown-toggle navy" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{categoria}}
+              </a>
+              <div class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="margin-left: -22vw;">
+                <div class="row row-cols-lg-5 row-cols-xl-5 text-center p-3" style="width: 62vw;"> 
+                  <a (click)="filtrarCategoria(categoria.nombre)" class="col col-lg-3 col-xl-3 p-3 text-decoration-none text-center navy d-flex" *ngFor="let categoria of listaCategorias" >
+                    <i class="bi {{categoria.icono}}"></i>
+                    <h6 class="card-title" style="margin-top: 0px">
+                      {{ categoria.nombre }}
+                    </h6>
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="text-center">           
+          <h5>¿Cuánto quieres ganar hoy?</h5>
+          <h5>{{rangoPrecio[0] + ' - ' + rangoPrecio[1]}}</h5>
+          <div class="row align-items-center">
+            <p class="col-2">Min.</p>
+            <div class="col-8"><p-slider (onSlideEnd)="filtrarPrecio()" [(ngModel)]="rangoPrecio" [range]="true" [max]="5000"></p-slider></div>
+            <p class="col-2">Máx.</p>
+          </div>
+          <div>
+            <p-selectButton [options]="paymentOptions" [(ngModel)]="value2" 
+                            [multiple]="true" optionLabel="name" optionValue="value"></p-selectButton>
+          </div>
+        </div>
+    
+        <div>
+          <h6><i class="bi bi-geo-alt-fill navy"></i>Ubicación</h6>
+          <form><input type="text"></form>          
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Fin filtros para movil -->
+
+  <!-- Filtros para tablet y ordenador -->
+
+  <nav class="navbar navbar-expand-md navbar-expand-lg d-none d-sm-block d-md-block d-lg-block navy mt-1">
+    <div class="container-fluid d-flex">
+      <p class="navbar-brand navy"><i class="bi bi-funnel-fill"></i>Filtros</p>
+     
+      <div id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown rounded-3" style="background-color: navy;">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{categoria}}
+            </a>
+            <div class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="margin-left: -22vw;">
+              <div class="row row-cols-lg-5 row-cols-xl-5 text-center p-3" style="width: 62vw;"> 
+                <a (click)="filtrarCategoria(categoria.nombre)" class="col col-lg-3 col-xl-3 p-3 text-decoration-none text-center navy d-flex" *ngFor="let categoria of listaCategorias" >
+                  <i class="bi {{categoria.icono}}"></i>
+                  <h6 class="card-title" style="margin-top: 0px">
+                    {{ categoria.nombre }}
+                  </h6>
+                </a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown rounded-3" style="background-color: navy;">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Precio
+            </a>
+            <div class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="margin-left: -11vw;">
+              <div class="row row-cols-lg-5 row-cols-xl-5 text-center p-3" style="width: 30vw;"> 
+                <div class="col col-lg-12 col-xl-12 p-3 text-center navy">
+                  <h6>¿Cuánto quieres ganar hoy?</h6>
+                  <h5>{{rangoPrecio[0] + ' - ' + rangoPrecio[1]}}</h5>
+                  <div class="row align-items-center">
+                    <p class="col-2">Min.</p>
+                    <div class="col-8"><p-slider (onSlideEnd)="filtrarPrecio()" [(ngModel)]="rangoPrecio" [range]="true" [max]="5000"></p-slider></div>
+                    <p class="col-2">Máx.</p>
+                  </div>
+                  <div>
+                    <p-selectButton [options]="paymentOptions" [(ngModel)]="value2" 
+                                    [multiple]="true" optionLabel="name" optionValue="value"></p-selectButton>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown rounded-3" style="background-color: navy;">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Ubicación
+            </a>
+            <div class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="margin-left: -7vw;">
+              <div class="row row-cols-lg-5 row-cols-xl-5 text-center p-3" style="width: 25vw;"> 
+                <div class="col col-lg-12 col-xl-12 p-3 text-center navy w-100">
+                  <h6><i class="bi bi-geo-alt-fill navy"></i>Dinos la ubicación</h6>
+                  <select name="" id="" class="w-100 form-select">
+                    <optgroup label="Sevilla">
+                      <option value="Sevilla">Sevilla</option>
+                      <option value="Burguillos">Burguillos</option>
+                      <option value="Gines">Gines</option>
+                    </optgroup>
+                    <optgroup label="Cádiz">
+                      <option value="Cádiz">Cádiz</option>
+                      <option value="Vejer de la Frontera">Vejer de la Frontera</option>
+                      <option value="El Palmar de Vejer">El Palmar de Vejer</option>
+                    </optgroup>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+     
+    </div>
+  </nav>
+
+  <!--  FIN Filtros para tablet y ordenador -->
+
+  <hr>
+
+  
+<!-- Ordenar por -->
+  <div class="d-flex text-center container justify-content-start">
+    <label class="p-1 navy"><i class="bi bi-arrows-expand p-2"></i>Ordenar por:</label>
+    <select class="p-1 navy">
+      <option value="Novedades" (click)="filtrarPorOrden('Novedades')">Novedades</option>
+      <option value="De más caro a más barato" (click)="filtrarPorOrden('De más caro a más barato')">De más caro a más barato</option>
+      <option value="De más barato a más caro" (click)="filtrarPorOrden('De más barato a más caro')">De más barato a más caro</option>
+      <option value="Distancia" (click)="filtrarPorOrden('Distancia')">Distancia</option>
+      <option value="Más antiguos" (click)="filtrarPorOrden('Más antiguos')">Más antiguos</option>
+    </select>
+  </div>
+
+  <!-- Fin ordenar -->
+
+<!-- ####### Mostrar los resultados -->
+  
+  <div class="p-5 card-group d-flex justify-content-evenly row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-2" >
+    
+
+    
+  <!-- Si el tamaño de la lista es 0 mostramos un mensaje distinto -->
+ 
+    <div *ngIf="this.listaAnuncios.length == 0" class="w-100 text-center navy">
+      <p >Upsss...No hay coincidencias con tu búsqueda, quizá Dori pueda ayudarte</p>
+      <img src="http://cd1.eju.tv/wp-content/uploads/2016/08/57a2edac26e66.gif" alt="no hay resultados">
+    </div>
+  
+  <!-- Si se han encontrado resultados los recogemos y mostramos -->
+
+    <div class="col mt-5" style="height: 370px;" *ngFor="let anuncio of this.listaAnuncios" #elseBlock>
+      <div class="card cardAnuncio">
+        <div class="card-body p-3 pb-0">
+          <div class="d-flex row">
+            <div class="col-6 col-sm-8" style="padding-left: 1.5em; padding-right: 1.5em; height: 150px;" [routerLink]="['/anuncio-detalle', anuncio.id]">
+              <div class=" text-center" style="border: 2px solid rgba(114, 113, 113, 0.342); height: 100%; border-radius: 4px;">
+              <img *ngIf="getImage(anuncio.file!)!= null"
+              src={{getImage(anuncio.file!)}}
+              style="max-height: 145px; width: auto;"
+              alt="cesped" class=" p-2 mt-auto mb-auto img-fluid">
+              <img *ngIf="getImage(anuncio.file!)== null"
+              src="../../../assets/img/default.png"
+              style="max-height: 145px; width: auto;"
+              alt="cesped" class=" p-2 mt-auto mb-auto img-fluid">
+            </div>
+            </div>
+            <div class="col-6 col-sm-4 navy">
+              <div class="d-flex justify-content-end pe-2"><i (click)="addFavoritos(anuncio, $event)" class="bi bi-heart corazonFavorito" ></i></div>
+              <div class="d-flex justify-content-center"  [routerLink]="['/anuncio-detalle', anuncio.id]"><h4 class="text-white rounded text-center w-100" style="background: navy">{{anuncio.precio}}€</h4></div>
+              <div class="d-flex justify-content-center w-100"  [routerLink]="['/anuncio-detalle', anuncio.id]"><h5 class=" letraResponsivaTipoPrecio">{{anuncio.tipoPrecio}}</h5></div>
+            </div>
+          </div>
+          <div class=" p-3  pt-0 navy"  [routerLink]="['/anuncio-detalle', anuncio.id]">
+            <h3 class="card-title text-start letraResponsiva textoConPuntosTitulo">{{anuncio.titulo}}</h3>
+            <p class="card-text letraResponsivaDescripcion textoConPuntos" style="  text-overflow: ellipsis; overflow: hidden;" >
+              {{anuncio.descripcion}}
+              
+            </p>
+            <hr>
+            <h5 class="w-100 text-center letraResponsivaUbicacion"><i class="bi bi-geo-alt-fill"></i>{{anuncio.ubicacion}}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+   
+
+   
+  </div>
+
+  
+
+
+
+
+

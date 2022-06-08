@@ -1,0 +1,78 @@
+.focusBorrar:hover {
+    color: red;
+}
+.focusEditar:hover {
+    color: blue;
+}
+.focusFinalizado:hover {
+    color: green;
+}
+
+.solicitante{
+    text-decoration: none;
+    list-style: none;
+    color: navy;
+}
+
+.solicitante:hover{
+    cursor: pointer;
+    background: rgb(233, 233, 233);
+}
+
+
+
+
+
+
+
+
+.ocultarMayor679 {
+    display: none !important;
+}
+/* @media screen and (max-width: 750px) {
+    .ocultarMayor679 {
+        display: flex !important;
+    }
+
+    .ocultarMenor680 {
+        display: none !important;
+    }
+  } */
+
+  @media screen and (max-width: 815px) {
+    .ocultarMayor679 {
+        display: flex !important;
+    }
+
+    .ocultarMenor680 {
+        display: none !important;
+    }
+
+    /* .textoConPuntos{
+        max-width: 100%;
+        
+        background-color: red;
+    } */
+  }
+
+  @media screen and (min-width: 816px) {
+    .textoConPuntos{
+        /* max-width: 160px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden; */
+        
+        display: block;
+        display: -webkit-box;
+        max-width: 100%;
+        height: 5em;
+        margin: 0 auto;
+       
+        line-height: 2.9;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        
+    }
+  }

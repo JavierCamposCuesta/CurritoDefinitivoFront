@@ -1,0 +1,6 @@
+<input id="file-input" type="file" (change)="selectFile($event) "/>
+<div class="col-4">
+    <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
+        Upload file
+    </button>
+</div>

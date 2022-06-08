@@ -1,0 +1,120 @@
+<section class="vh-75">
+  <div class=" py-1 h-75">
+    <div class="row d-flex justify-content-center align-items-center h-75 w-100  ms-auto me-auto">
+      <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-6">
+        <div class="card shadow-2-strong border-3 mt-5" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+
+            <h2 class="mb-3">¡Registrate con nosotros!</h2>
+
+            <form autocomplete="off"  [formGroup]="miFormulario" (ngSubmit) = "abrirDialogoVerificacion()"  class="row g-3">
+            
+            <!-- Nombre -->
+            <div class="col-md-4">
+              <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
+              <span class="form-text text-danger"
+                          *ngIf="campoNoValido('nombre')">
+                        Solo letras
+              </span>
+            </div>
+
+            <!-- Apellidos -->
+            <div class="col-md-8">
+              <input type="text" class="form-control" formControlName="apellidos" placeholder="Apellidos" maxlength="50">
+              <span class="form-text text-danger"
+                          *ngIf="campoNoValido('apellidos')">
+                        Debes introducir apellidos válidos
+              </span>
+            </div>
+
+            <!-- Email -->
+            <div class="col-md-8">
+              <input type="email" class="form-control" formControlName="email" placeholder="Email">
+              <span class="form-text text-danger"
+                           *ngIf="campoNoValido('email')">
+                        {{ emailErrorMsg }}
+              </span>
+              
+            </div>
+
+            <!-- Telefono -->
+            <div class="col-md-4">
+              <input type="text" class="form-control" formControlName="telefono" placeholder="Teléfono" maxlength="9">
+              <span class="form-text text-danger"
+                           *ngIf="campoNoValido('telefono')">
+                         Deben ser 9 dígitos.
+              </span>
+            </div>
+
+            <!-- Password -->
+            <div class="col-md-6">
+              <input type="password" class="form-control" formControlName="password" placeholder="Contraseña">
+              <span class="form-text text-danger"
+                           *ngIf="campoNoValido('password')">
+                         La contraseña debe de ser mayor de 6 caracteres.
+              </span>
+            </div>
+
+            <!-- Password2 -->
+            <div class="col-md-6">
+              <input type="password" class="form-control" formControlName="password2" placeholder="Confirma contraseña">
+              <span class="form-text text-danger"
+                *ngIf="campoNoValido('password2')">
+                 Las contraseñas deben de ser iguales
+                </span>
+            </div>
+
+            <!-- Direcccion -->
+            <div class="col-md-8 text-start">
+              <label for="inputEmail4" class="form-label ms-2">Dirección por defecto</label>
+              <input type="text" class="form-control" formControlName="direccion" placeholder="Dirección">
+              <span class="form-text text-danger"
+                *ngIf="campoNoValido('direccion')">
+                 La dirección es requerida
+                </span>
+            </div>
+
+            <!-- Nacimiento -->
+            <div class="col-md-4 text-start">
+              <label for="inputPassword4" class="form-label ms-2">Nacimiento</label>
+              <input type="date" class="form-control" formControlName="nacimiento">
+             
+            </div>
+           
+
+            <button class="btn btn-primary btn-lg btn-block w-50 ms-auto me-auto" type="submit" [disabled]="!miFormulario.valid">Registrarme</button>
+               
+          </form>
+          <div class="mt-1">
+            <a [routerLink]="['/login']">Iniciar sesión</a>
+          </div>
+            <hr class="my-4">
+
+          </div>
+
+          <!-- Dialogo para indicar el que ha realizado el anuncio -->
+          <p-dialog [(visible)]="dialogoVerificacion"  [responsive]="true" position='center' [style]="{width: '40vw'}">
+            
+            <h5 class="text-center mb-5 pt-0" ><strong>Introduce el código de verificación que hemos enviado a tu correo</strong></h5>
+            <form autocomplete="off"  [formGroup]="formCodigo" (ngSubmit) = "verificarUsuario()"  class="row g-3">
+              <div class="col-md-4 text-center">
+                <input type="text" class="form-control" formControlName="codigoVerificacionIntroducido" placeholder="Introduce el código" maxlength="4" minlength="4"
+                ondrop="return false;" onpaste="return false;" 
+                onkeypress="return event.charCode>=48 && event.charCode<=57" required>
+                
+              </div>
+            
+              <button class="btn btn-primary btn-lg btn-block w-50 ms-auto me-auto" type="submit" [disabled]="!formCodigo.valid">Validar código</button>
+            </form>
+          </p-dialog>
+          <!-- Fin dialogo -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+

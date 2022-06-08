@@ -1,0 +1,16 @@
+<form (ngSubmit)="buscar()"
+class="d-flex justify-content-center"
+style="background: white"
+>
+<input 
+  class="form-control me-2"
+  type="text"
+  placeholder="Buscar currito..."
+  aria-label="Search"
+  name="termino"
+  [(ngModel)]="busqueda"
+/>
+<button class="btn" type="submit">
+  <i class="bi bi-search" style="color: navy"></i>
+</button>
+</form>

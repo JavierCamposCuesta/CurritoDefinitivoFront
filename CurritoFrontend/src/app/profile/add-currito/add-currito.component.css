@@ -1,0 +1,11 @@
+.image-upload > input
+{
+    display: none;
+}
+
+.image-upload i
+{
+    
+    cursor: pointer;
+    font-size: 5em;
+}

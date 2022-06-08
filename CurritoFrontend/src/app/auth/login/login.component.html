@@ -1,0 +1,80 @@
+
+
+  <section class="vh-75">
+    <div class="container py-1 h-75">
+      <div class="row d-flex justify-content-center align-items-center h-75">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card shadow-2-strong border-3 mt-5" style="border-radius: 1rem;">
+            <div class="card-body p-5 pt-3 text-center">
+  
+              <h2 class="mb-3 mt-0 pt-3">¡Bienvenido de nuevo!</h2>
+              <!-- <h5 class="mb-5">Introduce tus credenciales para inciar sesión</h5> -->
+
+              <form autocomplete="off" #miFormulario="ngForm" (ngSubmit)="submitFormulario()">
+              <div class="form-outline mb-4">
+                <input type="email" class="form-control form-control-lg" placeholder="Introduce tu email"
+                [ngModel]="initForm.email"
+                required
+                [pattern]="emailPattern"
+                id="email" name="email"/>
+
+                <span class="form-text text-danger"
+                  *ngIf="emailValido()">
+                    Introduce un correo electrónico válido
+                </span>
+              </div>
+  
+              <div class="form-outline mb-4">
+                <input type="password" class="form-control form-control-lg" placeholder="Introduce tu contraseña"
+                [ngModel]="initForm.password"
+                required
+                id="password" name="password"/>
+
+                <span class="form-text text-danger"
+                  *ngIf="passValido()">
+                    La contraseña es requerida
+                </span>
+              </div>
+
+              <div class="text-center mb-2">
+
+                <span class="form-text text-danger"
+                 *ngIf="datosCorrectos">
+                  Usuario o Contraseña incorrecto
+                </span>
+
+              </div>
+             
+  
+              <button class="btn btn-primary btn-lg btn-block" type="submit">Iniciar sesión</button>
+            </form>
+
+            <div class="mt-1">
+              <a [routerLink]="['/register']">Regístrate</a>
+            </div>
+  
+              <hr class="my-4">
+  
+                <!-- <div class="d-grid gap-2">
+                    <button class="btn btn-primary" style="background-color: #dd4b39;" type="submit" disabled><i class="bi bi-google pe-1"></i>Registrate con google</button>
+
+                    <button class="btn btn-primary mb-2" style="background-color: #3b5998;" type="submit" disabled><i class="bi bi-facebook pe-1"></i>Registrate con facebook</button>
+
+                </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+ 
+
+  
+
+
+
+ 
+
+  

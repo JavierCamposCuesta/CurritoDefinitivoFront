@@ -1,0 +1,100 @@
+<!-- <div class="w-100 d-flex row">
+ 
+  <div class="col-8 w-75" style="margin-left: 20%;"> -->
+    <h2 class="pt-5 mb-0 mb-3 ms-5">{{this.titulo}}</h2>
+    <section class="vh-75">
+        <div class="container h-75">
+          <div class="row d-flex justify-content-center align-items-center h-75">
+            <div class="col-12 col-sm-12 col-md-10 col-lg-6 col-xl-5 w-100">
+              <div class="card shadow-2-strong border-3 w-100" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
+      
+                  
+      
+                  <form autocomplete="off"  [formGroup]="miFormulario" (ngSubmit) = "submitFormulario()"  class="row g-3">
+                  
+                  <!-- Titulo -->
+                  <div class="col-md-12 text-start">
+                    <label class="form-label ms-2">Título</label>
+                    <input type="text" class="form-control" formControlName="titulo" placeholder="Define tu anuncio brevemente..." maxlength="50">
+                    <span class="form-text text-danger"
+                                *ngIf="campoNoValido('titulo')">
+                              El título no puede estar vacío
+                    </span>
+                  </div>
+      
+                  <!-- Categoría -->
+                  <div class="col-md-6 text-start">
+                    <label for="inputEmail4" class="form-label ms-2">Categoría</label>
+                    <select class="form-select" formControlName="categoria" name="select" [(ngModel)]="categoriaDefecto">
+                      
+                      <option  *ngFor="let item of listaCategorias.data; let indice=index" [value]="item.nombre" [defaultSelected]="item.nombre=='Hogar'">{{item.nombre}}</option>
+                        <!-- <option value="2">Jardinería</option> -->
+                    </select>
+                  </div>
+      
+                  <!-- Precio -->
+                  <div class="col-md-3 text-start">
+                    <label for="inputPassword4" class="form-label ms-2">Precio</label>
+                    <input type="number" class="form-control" formControlName="precio" placeholder="0" [defaultValue]="0" min="0" step="any">
+                  </div>
+
+                  <!-- Tipo precio -->
+                  <div class="col-md-3 text-start">
+                    <label for="inputPassword4" class="form-label ms-2 opacity-0">Tipo de precio</label>
+                    <select class="form-select" formControlName="tipoPrecio" name="select" [(ngModel)]="tipoPrecioDefecto">
+                        <option value="Total">Total</option>
+                        <option value="Por horas">Por horas</option>
+                    </select>
+                  </div>
+      
+                  <!-- Descripción -->
+                  <div class="col-md-12 text-start">
+                    <label class="form-label ms-2">Descripción</label>
+                    <textarea placeholder="Escribe una breve descripción" formControlName="descripcion" class="form-text w-100" maxlength="1500"></textarea>
+                    
+                  </div>
+      
+                  <!-- Imagenes -->
+                  <div class="col-md-12 text-start row">
+                      <label class="form-label ms-2 mt-3 text-start">Subir imágenes</label>
+                    <div class="image-upload col-md-2">
+                        <label for="file-input">
+                            <i class="bi bi-image navy" alt ="Click aquí para subir tu foto" title ="Click aquí para subir tu foto" ></i>
+                        </label>
+                    
+                        <input id="file-input" type="file" formControlName="imagen" (change)="selectFile($event)"/>
+                        <!-- <app-upload-image></app-upload-image> -->
+                        
+                    </div>
+                   
+                  </div>
+                 <!-- Ubicación -->
+                 <div class="col-md-12 text-start">
+                    <label class="form-label ms-2">Ubicación</label>
+                    <input type="test" class="form-control" formControlName="ubicacion" placeholder="Ubicación">
+                    
+                      
+                  </div>
+      
+                  <button class="btn btn-primary btn-lg btn-block w-50 ms-auto me-auto" type="submit" >{{botonRegistro}}</button>
+                     
+                </form>
+                
+                  <hr class="my-4">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <p-toast position="bottom-center" ></p-toast>
+      
+      
+      
+      
+      
+      
+      <!-- </div>
+    </div> -->

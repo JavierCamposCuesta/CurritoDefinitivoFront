@@ -1,0 +1,55 @@
+<h2 class="pt-5 mb-0 mb-3 ms-5">Mis Opiniones</h2>
+
+
+
+<div class="tab-content" id="nav-tabContent">
+
+  <!-- Tabla para mostrar mis anuncios -->
+   <!-- Esta tabla es para anuncios terminados -->
+   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+    <div *ngFor="let opinion of this.listaOpiniones" class="card mb-3" style="max-width: 100%;" >
+        
+          <div class="row g-0">
+              <div class="col-md-1">
+                <img *ngIf="getImage(opinion.anuncio!.file!)== null" src="../../../assets/img/default.png" class="img-fluid rounded-start" alt="...">
+                <img *ngIf="getImage(opinion.anuncio!.file!)!= null" src={{getImage(opinion.anuncio!.file!)}} class="img-fluid rounded-start" alt="...">
+
+              </div>
+              <div class="col-md-3">
+                <div class="card-body">
+                  <p *ngIf="opinion.realizaste == true" class="card-text mb-0"><small class="text-muted">Realizaste</small></p>
+                  <p *ngIf="opinion.realizaste == false" class="card-text mb-0"><small class="text-muted">Ofrecistes</small></p>
+
+                  <h5 class="card-title">{{opinion.anuncio!.titulo}}</h5>
+                  <p-rating ngModel="{{opinion.puntuacionEstrellas}}" [cancel]="false" [readonly]="true"></p-rating>
+                </div>
+              </div>
+              <div class="col-md-7">
+                <div class="card-body text-start">
+                  <p class="card-text text-start">{{opinion.textoComentario}}</p>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="card-body text-start">
+                  <p class="card-text"><small class="text-muted">{{opinion.fecha}}</small></p>
+
+                </div>
+              </div>
+            </div>
+        
+      </div>
+
+    <!-- Mensaje que se mostrará si no hay ningún currito solicitado -->
+    <div *ngIf="this.listaOpiniones.length == 0" class="w-100 text-center navy mt-5">
+        <p>¡Espabila! Aún no te han realizado opiniones</p>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+ 
+
+  

@@ -1,0 +1,74 @@
+<div class="fixed-bottom d-flex row justify-content-evenly g-1 w-100 d-lg-none" style="background-color: navy;">
+    <div class="col-2 col-md-2 text-center" style="height: 65px;">
+      <a href="#" class="p-2 text-decoration-none text-white">
+        <i class="bi bi-house" style="color: white; font-size: 1.5em"></i>
+        <h6>Home</h6>
+      </a>
+    </div>
+    <div class="col-2 col-md-2 text-center" style="height: 65px;">
+      
+      <a [routerLink]="['profile']" class="p-2 text-decoration-none text-white">
+        <i class="bi bi-bookmark-heart" style="color: white; font-size: 1.5em"></i>
+        <h6>Favoritos</h6>
+      </a>
+    </div>
+    <div class="col-3 col-md-3 text-center" style="height: 65px;">
+      
+      <a [routerLink]="['profile/addCurrito']" class="p-2 text-decoration-none text-white">
+        <i class="bi bi-plus-circle" style="color: white; font-size: 1.5em"></i>
+        <h6>Currito</h6>
+      </a>
+    </div>
+    <div class="col-2 col-md-2 text-center" style="height: 65px;">
+      
+      <a href="#" class="p-2 text-decoration-none text-white">
+        <i class="bi bi-chat-dots" style="color: white; font-size: 1.5em"></i>
+        <h6>Mensajes</h6>
+      </a>
+    </div>
+    <div class="col-2 col-md-2 text-center" style="height: 65px;">
+      
+      <a href="" class="p-2 text-decoration-none text-white" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+        <i class="bi bi-person-circle" style="color: white; font-size: 1.5em"></i>
+        <h6>Perfil</h6>
+      </a>
+
+      <div class="offcanvas offcanvas-end navy" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+          <h5 id="offcanvasRightLabel">Menú Perfil</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <a [routerLink]="['profile']" class="p-2 text-decoration-none d-flex navy">
+                <i class="bi bi-person-circle" style="font-size: 1.5em"></i>
+                <h6 class="p-2">Perfil</h6>
+            </a>
+            <a [routerLink]="['profile/misCurritos']" class="p-2 text-decoration-none d-flex navy">
+                <i class="bi bi-emoji-sunglasses" style="font-size: 1.5em"></i>
+                <h6 class="p-2">Mis Currito's</h6>
+            </a>
+            <a [routerLink]="['profile/curritos-solicitados']" class="p-2 text-decoration-none d-flex navy">
+              <i class="bi bi-sunglasses" style="font-size: 1.5em"></i>
+              <h6 class="p-2">Currito's solicitados</h6>
+          </a>
+            <a href="#" class="p-2 text-decoration-none d-flex navy">
+                <i class="bi bi-star-half" style="font-size: 1.5em"></i>
+                <h6 class="p-2">Opiniones</h6>
+            </a>
+            
+            <div class="d-flex fixed-bottom justify-content-end">
+                <a href="#" class="p-2 text-decoration-none d-flex navy">
+                    <h6 class="p-2">Cerrar sesión</h6>
+                    <i class="bi bi-door-open" style="font-size: 1.5em"></i>
+                </a>
+            </div>
+
+            <a href="#" class="p-2 text-decoration-none d-flex navy">
+                <i class="bi bi-gear-fill" style="font-size: 1.5em"></i>
+                <h6 class="p-2">Configuración</h6>
+            </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
