@@ -22,7 +22,7 @@
               </div>
           
               <!-- Dialogo para añadir un comentario al usuario que realiza el trabajo -->
-              <p-dialog [(visible)]="dialogoComentario"  [responsive]="true" position='center' [style]="{width: '60vw'}" [baseZIndex]="10000">
+              <p-dialog [(visible)]="dialogoComentario"  [responsive]="true" position='center' [style]="{width: '60vw'}" [baseZIndex]="10000" [modal]="true" [closeOnEscape]="true" [dismissableMask]="true">
                 <h3 class="text-center mt-0 pt-0" style="margin-top: -100px; padding-top: -50px;  margin-bottom: 30px;">¿Cómo ha sido tu experiencia con {{comentario.usuarioComentado?.nombre}} {{comentario.usuarioComentado?.apellidos}}?</h3>
       
                   <form autocomplete="off"  [formGroup]="formComentario" (ngSubmit) = "submitComentario(comentario.id!)"  class="row g-3">
@@ -43,7 +43,7 @@
               
                 
                 <ng-template pTemplate="footer">
-                    <p-button icon="pi pi-times"  label="Cerrar" styleClass="p-button-text"></p-button>
+                    <!-- <p-button icon="pi pi-times"  label="Cerrar" styleClass="p-button-text"></p-button> -->
                 </ng-template>
               </p-dialog>
               <!-- Fin dialogo -->

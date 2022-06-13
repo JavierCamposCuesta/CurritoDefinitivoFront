@@ -79,8 +79,12 @@ export class AnuncioService {
    * @param user 
    * @returns Un observable con el resultado de la petición
    */
- addAnuncio(anuncio:Anuncio, file:File | undefined){
-  const url = `${this.baseUrl}/anuncio`;
+ addAnuncio(anuncio:Anuncio, file:any){
+   let url = `${this.baseUrl}/anuncio`;
+   
+  if(file === "notFound"){
+    url = `${this.baseUrl}/anuncio/defaultImg`;
+  }
   const headers = this.cargarHeaders();
 
   const formData: FormData = new FormData();

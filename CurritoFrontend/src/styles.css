@@ -2,6 +2,9 @@
 .navy{
     color: navy;
   }
+  .navyBg {
+    background-color: navy;
+  }
 
   .textoConPuntos {
     display: block;

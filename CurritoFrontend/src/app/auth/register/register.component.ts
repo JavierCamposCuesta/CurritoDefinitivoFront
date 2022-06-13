@@ -7,6 +7,8 @@ import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { RegisterService } from 'src/app/services/register.service';
 import { Router } from '@angular/router';
+// Importo el archivo JSON 
+import listaProvincias from 'src/assets/json/provincias.json';
 
 @Component({
   selector: 'app-register',
@@ -40,6 +42,9 @@ solucion: string = "";
 codVerificacionIntroducido: number= 1;
 codVerificacionCorrecto: number= 2;
 dialogoVerificacion: boolean = false;
+// Exporto los datos del archivo JSON
+listaProvincias: any = listaProvincias;
+domicilioPorDefecto:string="Almería"
 
 
 
@@ -149,6 +154,7 @@ constructor( private fb: FormBuilder,
     }
 
     crearCodigoVerificacion(){
+      console.log(this.miFormulario.get("direccion")?.value)
       this.registerService.verificarUsuario(this.miFormulario.get("email")?.value).subscribe({
         
         next:resp => {

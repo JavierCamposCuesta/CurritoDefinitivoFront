@@ -43,8 +43,8 @@
           </ng-template>
           <ng-template pTemplate="body" let-anuncio let-columns="anuncio">
               <tr>
-                <td *ngIf="getImage(anuncio.file)== null"><img src="../../../assets/img/default.png" alt="Imagen" width="70" style="margin: -20px; padding: -20px; margin-left: 10px;" /></td>
-                <td *ngIf="getImage(anuncio.file)!= null"><img src={{getImage(anuncio.file)}} alt="Imagen" width="70" style="margin: -20px; padding: -20px; margin-left: 10px;" /></td>
+                <td *ngIf="getImage(anuncio.file)== null" class="my-sm-3"><img src="../../../assets/img/default.png" alt="Imagen" style="width:50px;height:50px;overflow:hidden" /></td>
+                <td *ngIf="getImage(anuncio.file)!= null" class="my-sm-3"><img src={{getImage(anuncio.file)}} alt="Imagen" style="width:50px;height:50px;overflow:hidden" /></td>
                   <td [routerLink]="['/anuncio-detalle', anuncio.id]" class='textoConPuntos ' ><span class="p-column-title" pSortableColumn="titulo"><strong>Título</strong></span>{{anuncio.titulo}}</td>
                   <td [routerLink]="['/anuncio-detalle', anuncio.id]"><span class="p-column-title" pSortableColumn="categoria"><strong>Categoría</strong></span>{{anuncio.categoria}}</td>
                   <td [routerLink]="['/anuncio-detalle', anuncio.id]"><span class="p-column-title" pSortableColumn="precio"><strong>Precio</strong></span>{{anuncio.precio}} €</td>
@@ -62,7 +62,7 @@
               </tr>
 
               <!-- Dialogo para indicar el que ha realizado el anuncio -->
-              <p-dialog [(visible)]="displayBasic2"  [responsive]="true" position='center' [style]="{width: '40vw'}">
+              <p-dialog [(visible)]="displayBasic2"  [responsive]="true" position='center' [style]="{width: '40vw'}" [modal]="true" [closeOnEscape]="true" [dismissableMask]="true">
                 <h5 class="text-center mt-0 pt-0" *ngIf="this.listaSolicitantes.length ==0; ">Ningún usuario ha solicitado el anuncio</h5>
                 <h5 class="text-center mt-0 pt-0" style="margin-top: -80px; padding-top: -50px;" *ngIf="this.listaSolicitantes.length >0;">¿Qué usuario ha realizado el anuncio?</h5>
               
@@ -77,7 +77,7 @@
               
                 
                 <ng-template pTemplate="footer">
-                    <p-button icon="pi pi-times" (click)="closeBasicDialog2()" label="Cerrar" styleClass="p-button-text"></p-button>
+                    <!-- <p-button icon="pi pi-times" (click)="closeBasicDialog2()" label="Cerrar" styleClass="p-button-text"></p-button> -->
                 </ng-template>
               </p-dialog>
               <!-- Fin dialogo -->
@@ -88,7 +88,7 @@
           </p-table>
 
           <!-- Dialogo para añadir un comentario al usuario que realiza el trabajo -->
-          <p-dialog [(visible)]="dialogoComentario"  [responsive]="true" position='center' [style]="{width: '60vw'}" [baseZIndex]="10000">
+          <p-dialog [(visible)]="dialogoComentario"  [responsive]="true" position='center' [style]="{width: '60vw'}" [baseZIndex]="10000" [modal]="true" [closeOnEscape]="true" [dismissableMask]="true">
             <h3 class="text-center mt-0 pt-0" style="margin-top: -100px; padding-top: -50px;  margin-bottom: 30px;">¿Cómo ha sido tu experiencia con {{solicitante.nombre}} {{solicitante.apellidos}}?</h3>
 
               <form autocomplete="off"  [formGroup]="formComentario" (ngSubmit) = "submitComentario(anuncioComentar.id!, solicitante.email!)"  class="row g-3">
@@ -111,7 +111,7 @@
           
             
             <ng-template pTemplate="footer">
-                <p-button icon="pi pi-times" (click)="closeBasicDialog2()" label="Cerrar" styleClass="p-button-text"></p-button>
+                <!-- <p-button icon="pi pi-times" (click)="closeBasicDialog2()" label="Cerrar" styleClass="p-button-text"></p-button> -->
             </ng-template>
           </p-dialog>
           <!-- Fin dialogo -->
@@ -145,8 +145,8 @@
           </ng-template>
           <ng-template pTemplate="body" let-anuncioTerminado let-columns="anuncio">
               <tr>
-                <td *ngIf="getImage(anuncioTerminado.file)== null"><img src="../../../assets/img/default.png" alt="Imagen" width="70" style="margin: -20px; padding: -20px; margin-left: 10px;" /></td>
-                <td *ngIf="getImage(anuncioTerminado.file)!= null"><img src={{getImage(anuncioTerminado.file)}} alt="Imagen" width="70" style="margin: -20px; padding: -20px; margin-left: 10px;" /></td>
+                <td *ngIf="getImage(anuncioTerminado.file)== null" class="my-sm-3"><img src="../../../assets/img/default.png" alt="Imagen" style="width:50px;height:50px;overflow:hidden" /></td>
+                <td *ngIf="getImage(anuncioTerminado.file)!= null" class="my-sm-3"><img src={{getImage(anuncioTerminado.file)}} alt="Imagen" style="width:50px;height:50px;overflow:hidden" /></td>
                   <td ><span class="p-column-title" pSortableColumn="titulo"><strong>Título</strong></span>{{anuncioTerminado.titulo}}</td>
                   <td><span class="p-column-title" pSortableColumn="categoria"><strong>Categoría</strong></span>{{anuncioTerminado.categoria}}</td>
                   <td><span class="p-column-title" pSortableColumn="precio"><strong>Precio</strong></span>{{anuncioTerminado.precio}} €</td>
@@ -174,7 +174,8 @@
     <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
 
 <!-- Mostramos un dialogo con el formulario de añadir anuncio ya relleno para modificar los datos -->
-  <p-dialog [(visible)]="dialogoVisible">
+  
+<p-dialog [(visible)]="dialogoVisible" [modal]="true" [closeOnEscape]="true" [dismissableMask]="true">
     
     <app-add-currito [edit]="true" [anuncioEditar]="anuncioSeleccionado" (recargarListado)="misAnuncios()"></app-add-currito>
       

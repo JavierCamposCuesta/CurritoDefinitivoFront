@@ -1,7 +1,8 @@
 import { Byte } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
-import { Comentario } from 'src/app/interfaces/interface';
+import { Comentario, Usuario } from 'src/app/interfaces/interface';
 import { AnuncioService } from 'src/app/services/anuncio.service';
+import { LoginService } from 'src/app/services/login.service';
 import { OpinionsService } from 'src/app/services/opinions.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { OpinionsService } from 'src/app/services/opinions.service';
 })
 export class OpinionsComponent implements OnInit {
 
-  constructor(private opinionsService: OpinionsService, private anuncioService: AnuncioService) { }
+  constructor(private opinionsService: OpinionsService, private anuncioService: AnuncioService, private loginService:LoginService) { }
 
   ngOnInit(): void {
     window.scrollTo(0,0),
@@ -20,6 +21,7 @@ export class OpinionsComponent implements OnInit {
   }
 
   listaOpiniones: Comentario[]= [];
+  
 
 /**
    * Metodo para cargar las opiniones por trabajos realizados

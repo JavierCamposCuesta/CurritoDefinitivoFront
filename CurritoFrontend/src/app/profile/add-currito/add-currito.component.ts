@@ -14,6 +14,9 @@ import { RegisterService } from 'src/app/services/register.service';
 import { ValidatorRegistroService } from 'src/app/services/validatorRegistro.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
+// Importo el archivo JSON 
+import listaProvincias from 'src/assets/json/provincias.json';
+// import imagen from 'src/assets/img/default.png';
 
 @Component({
   selector: 'app-add-currito',
@@ -38,11 +41,14 @@ export class AddCurritoComponent implements OnInit {
   categoriaDefecto:string="Todas las categorias"
   tipoPrecioDefecto:string="Por horas";
   selectedFiles?: FileList;
-  currentFile?: File;
+  currentFile?: any= "notFound";
   message = '';
   fileInfos?: Observable<any>;
   mostrar: boolean = false;
-
+  listaProvincias: any = listaProvincias;
+  // imagenPorDefecto: File = require('../../../assets/img/default.png');
+  domicilioPorDefecto:string="Almería"
+  previsualizarImagen:any=""
   /**
    * Lo emitimos para que se recargue el componente de mostrar los anuncios solicitados, una vez que hemos actualizado el anuncio
    */
@@ -152,7 +158,19 @@ export class AddCurritoComponent implements OnInit {
          */
         selectFile(event: any): void {
           this.selectedFiles = event.target.files;
+          if(this.selectedFiles){
+            const reader = new FileReader();
+            reader.onload = (event)=>{
+              this.previsualizarImagen = event.target?.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+          }
+          else{
+            this.previsualizarImagen= "";
+          }
         }
+
+        
       
       /**
        * Este metodo recibira un usuario del formulario y llamara 
@@ -165,7 +183,11 @@ export class AddCurritoComponent implements OnInit {
 
           const file: File | null = this.selectedFiles.item(0);
           if (file) {
-        this.currentFile = file;
+            this.currentFile = file;
+          }
+        }
+
+          console.log(this.currentFile)
         let respuesta: LoginRespuesta = {};
         let solucion: string;
         const anuncio = {
@@ -201,9 +223,9 @@ export class AddCurritoComponent implements OnInit {
          this.currentFile = undefined;
        },
      })
-    }
+    // }
     this.selectedFiles = undefined;
-    }
+    // }
       }
 
       

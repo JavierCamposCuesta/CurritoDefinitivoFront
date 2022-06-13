@@ -42,9 +42,9 @@
                     <a class="nav-link text-white" aria-current="page" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
                       <h5>Notificaciones</h5>
                     </a>
-                    <div  class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="margin-left: -11vw;">
+                    <div  class="dropdown-menu dropdown-menu rounded-3 shadow bg-body" aria-labelledby="navbarDropdownMenuLink" style="margin-left: -11vw;border: 1px solid lightblue;">
                       <div  class="row row-cols-lg-8 row-cols-xl-8 p-2 ms-3 text-start" style="width: 30vw;"> 
-                        <h5>Comentarios pendiente</h5>
+                        <h5 *ngIf="listaNotificaciones.length == 0">No tienes notificaciones</h5>
                         <div *ngFor="let notificacion of this.listaNotificaciones" class="col col-lg-12 col-xl-12 p-3 navy">
                           <a [routerLink]="['profile/notification']" style="text-decoration: none;">
                             <h5>Evalua a {{notificacion.usuarioComentado?.nombre}} como ofertante del trabajo que realizastes</h5>
@@ -64,11 +64,11 @@
                 class="bi bi-person-circle"
                 style="color: white; font-size: 1.5em"
               ></i>
-              <a *ngIf="usuarioRegistrado.nombre != ''" class="nav-link text-white" aria-current="page" [routerLink]="['profile']">
+              <a *ngIf="usuarioRegistrado.nombre != ''" class="nav-link text-white" aria-current="page" [routerLink]="['/profile/my-profile']">
                 <!-- Cuando el usuario está logueado mostramos su nombre y la primera letra de su apellido en mayúsculas, en vez de mi perfil -->
                 <h5>{{usuarioRegistrado.nombre?.charAt(0)?.toUpperCase()}}{{usuarioRegistrado.nombre?.slice(1)}} {{usuarioRegistrado.apellidos?.charAt(0)?.toUpperCase()}}</h5>
               </a>
-              <a *ngIf="usuarioRegistrado.nombre == ''" class="nav-link text-white" aria-current="page" [routerLink]="['profile']">
+              <a *ngIf="usuarioRegistrado.nombre == ''" class="nav-link text-white" aria-current="page" [routerLink]="['/profile/my-profile']">
                 <h5>Mi perfil</h5>
               </a>
             </li>

@@ -2,7 +2,7 @@
   <div class=" py-1 h-75">
     <div class="row d-flex justify-content-center align-items-center h-75 w-100  ms-auto me-auto">
       <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-6">
-        <div class="card shadow-2-strong border-3 mt-5" style="border-radius: 1rem;">
+        <div style="border: 1px solid lightblue;" class="rounded-3 shadow p-3 mb-5 bg-body mt-5">
           <div class="card-body p-5 text-center">
 
             <h2 class="mb-3">¡Registrate con nosotros!</h2>
@@ -65,13 +65,19 @@
             </div>
 
             <!-- Direcccion -->
-            <div class="col-md-8 text-start">
+            <!-- <div class="col-md-8 text-start">
               <label for="inputEmail4" class="form-label ms-2">Dirección por defecto</label>
               <input type="text" class="form-control" formControlName="direccion" placeholder="Dirección">
               <span class="form-text text-danger"
                 *ngIf="campoNoValido('direccion')">
                  La dirección es requerida
                 </span>
+            </div> -->
+            <div class="col-md-8 text-start">
+              <label for="inputEmail4" class="form-label ms-2">Dirección por defecto</label>
+              <select class="form-select" formControlName="direccion" name="select" [(ngModel)]="domicilioPorDefecto">
+                  <option *ngFor="let provincia of listaProvincias" value={{provincia.nm}}>{{provincia.nm}}</option>
+              </select>
             </div>
 
             <!-- Nacimiento -->
@@ -85,10 +91,10 @@
             <button class="btn btn-primary btn-lg btn-block w-50 ms-auto me-auto" type="submit" [disabled]="!miFormulario.valid">Registrarme</button>
                
           </form>
+          <hr class="my-4">
           <div class="mt-1">
             <a [routerLink]="['/login']">Iniciar sesión</a>
           </div>
-            <hr class="my-4">
 
           </div>
 

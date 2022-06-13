@@ -28,7 +28,7 @@
     </div>
     <div class="col-2 col-md-2 text-center" style="height: 65px;">
       
-      <a href="" class="p-2 text-decoration-none text-white" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+      <a href="" class="p-2 text-decoration-none text-white" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" role="navigation">
         <i class="bi bi-person-circle" style="color: white; font-size: 1.5em"></i>
         <h6>Perfil</h6>
       </a>
@@ -39,10 +39,18 @@
           <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <a [routerLink]="['profile']" class="p-2 text-decoration-none d-flex navy">
+            <a [routerLink]="['profile/my-profile']" class="p-2 text-decoration-none d-flex navy">
                 <i class="bi bi-person-circle" style="font-size: 1.5em"></i>
                 <h6 class="p-2">Perfil</h6>
             </a>
+            <a href="#" class="p-2 text-decoration-none d-flex navy" [routerLink]="['profile/notification']">
+              <i class="bi bi-bell" style="font-size: 1.5em"></i>
+              <h6 class="p-2">Notificaciones</h6>
+          </a>
+          <a href="#" class="p-2 text-decoration-none d-flex navy" [routerLink]="['profile/favorites']">
+            <i class="bi bi-bookmark-heart" style="font-size: 1.5em"></i>
+            <h6 class="p-2">Mis Favoritos</h6>
+        </a>
             <a [routerLink]="['profile/misCurritos']" class="p-2 text-decoration-none d-flex navy">
                 <i class="bi bi-emoji-sunglasses" style="font-size: 1.5em"></i>
                 <h6 class="p-2">Mis Currito's</h6>
@@ -51,7 +59,7 @@
               <i class="bi bi-sunglasses" style="font-size: 1.5em"></i>
               <h6 class="p-2">Currito's solicitados</h6>
           </a>
-            <a href="#" class="p-2 text-decoration-none d-flex navy">
+            <a href="#" class="p-2 text-decoration-none d-flex navy" [routerLink]="['profile/opinions']">
                 <i class="bi bi-star-half" style="font-size: 1.5em"></i>
                 <h6 class="p-2">Opiniones</h6>
             </a>
@@ -63,10 +71,7 @@
                 </a>
             </div>
 
-            <a href="#" class="p-2 text-decoration-none d-flex navy">
-                <i class="bi bi-gear-fill" style="font-size: 1.5em"></i>
-                <h6 class="p-2">Configuración</h6>
-            </a>
+            
         </div>
       </div>
 

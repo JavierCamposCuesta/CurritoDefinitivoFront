@@ -31,6 +31,7 @@ export interface Usuario {
     telefono?: string;
     fechaNacimiento?: string;
     ubicacion?: string;
+    fotoPerfil?: Byte[];
 }
 
 // export interface Anuncio {

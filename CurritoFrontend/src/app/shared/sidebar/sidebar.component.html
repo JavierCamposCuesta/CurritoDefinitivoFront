@@ -1,48 +1,47 @@
-
-    <div class="p-3 ps-0 pe-0 col-4 position-fixed h-100 d-none d-lg-block" style="background: rgba(211, 211, 211, 0.562); width: 20%; z-index: 1;">
-    <ul class="nav flex-column">
-      <li class="nav-item w-100 liBoton">
-        <a class="nav-link navy d-flex" [routerLink]="['/profile/my-profile']" routerLinkActive="active">
-          <span class="bi bi-person-circle navy p-2 fs-3"></span>
-          <span class="fs-6 mt-3 p-1">Mi Perfil</span>
-        </a>
-      </li>
-      <li class="nav-item w-100 liBoton">
-        <a class="nav-link navy d-flex" [routerLink]="['/profile/misCurritos']" routerLinkActive="active">
-          <span class="bi bi-briefcase navy p-2 fs-3"></span>
-          <span class="fs-6 mt-3 p-1">Mis Currito's</span>
-        </a>
-      </li>
-      <li class="nav-item w-100 liBoton">
-        <a class="nav-link navy d-flex" [routerLink]="['/profile/curritos-solicitados']" routerLinkActive="active">
-          <span class="bi bi-sunglasses navy p-2 fs-3"></span>
-          <span class="fs-6 mt-3 p-1">Currito's solicitados</span>
-        </a>
-      </li>
-      <li class="nav-item w-100 liBoton">
-        <a class="nav-link navy d-flex" [routerLink]="['/profile/notification']" routerLinkActive="active">
-          <span class="bi bi-chat-dots navy p-2 fs-3"></span>
-          <span class="fs-6 mt-3 p-1">Mensajes</span>
-        </a>
-      </li>
-      <li class="nav-item w-100 liBoton">
-        <a class="nav-link navy d-flex" [routerLink]="['/profile/favorites']" routerLinkActive="active">
-          <span class="bi bi-bookmark-heart navy p-2 fs-3"></span>
-          <span class="fs-6 mt-3 p-1">Favoritos</span>
-        </a>
-      </li>
-      <li class="nav-item w-100 liBoton">
-        <a class="nav-link navy d-flex" [routerLink]="['/profile/opinions']" routerLinkActive="active">
-          <span class="bi bi-star-half navy p-2 fs-3"></span>
-          <span class="fs-6 mt-3 p-1">Opiniones</span>
-        </a>
-      </li>
-      <li class="nav-item w-100 liBoton mt-4">
-        <a class="nav-link navy d-flex" (click)="cerrarSesion()" href="#">
-          <span class="bi bi-person-x-fill navy p-2 fs-3"></span>
-          <span class="fs-6 mt-3 p-1">Cerrar sesión</span>
-        </a>
-      </li>
-    </ul>
-  </div>
- 
+<div class="p-3 ps-0 pe-0 w-100 h-100 d-none d-lg-block"
+  style="background: rgba(211, 211, 211, 0.562); width: 20%; z-index: 1;">
+  <ul class="nav flex-column">
+    <li class="nav-item w-100 liBoton">
+      <a class="nav-link navy d-flex" [routerLink]="['/profile/my-profile']" routerLinkActive="active">
+        <span class="bi bi-person-circle navy p-2 fs-3"></span>
+        <span class="fs-6 mt-3 p-1">Mi Perfil</span>
+      </a>
+    </li>
+    <li class="nav-item w-100 liBoton">
+      <a class="nav-link navy d-flex" [routerLink]="['/profile/misCurritos']" routerLinkActive="active">
+        <span class="bi bi-briefcase navy p-2 fs-3"></span>
+        <span class="fs-6 mt-3 p-1">Mis Currito's</span>
+      </a>
+    </li>
+    <li class="nav-item w-100 liBoton">
+      <a class="nav-link navy d-flex" [routerLink]="['/profile/curritos-solicitados']" routerLinkActive="active">
+        <span class="bi bi-sunglasses navy p-2 fs-3"></span>
+        <span class="fs-6 mt-3 p-1">Currito's solicitados</span>
+      </a>
+    </li>
+    <li class="nav-item w-100 liBoton">
+      <a class="nav-link navy d-flex" [routerLink]="['/profile/notification']" routerLinkActive="active">
+        <span class="bi bi-chat-dots navy p-2 fs-3"></span>
+        <span class="fs-6 mt-3 p-1">Mensajes</span>
+      </a>
+    </li>
+    <li class="nav-item w-100 liBoton">
+      <a class="nav-link navy d-flex" [routerLink]="['/profile/favorites']" routerLinkActive="active">
+        <span class="bi bi-bookmark-heart navy p-2 fs-3"></span>
+        <span class="fs-6 mt-3 p-1">Favoritos</span>
+      </a>
+    </li>
+    <li class="nav-item w-100 liBoton">
+      <a class="nav-link navy d-flex" [routerLink]="['/profile/opinions']" routerLinkActive="active">
+        <span class="bi bi-star-half navy p-2 fs-3"></span>
+        <span class="fs-6 mt-3 p-1">Opiniones</span>
+      </a>
+    </li>
+    <li class="nav-item w-100 liBoton" style="margin-top: 350px;">
+      <a class="nav-link navy d-flex" (click)="cerrarSesion()" href="#">
+        <span class="bi bi-person-x-fill navy p-2 fs-3"></span>
+        <span class="fs-6 mt-3 p-1">Cerrar sesión</span>
+      </a>
+    </li>
+  </ul>
+</div>

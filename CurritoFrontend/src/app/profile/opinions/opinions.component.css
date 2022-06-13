@@ -1,0 +1,32 @@
+.img-profile {
+    width:50px;height:50px;overflow:hidden; background-color: lightblue; border-radius: 50%;
+    border: 5px solid white;   
+}
+    .img-profile > img {
+        width:40px;height:40px;overflow:hidden;  border-radius: 50%;
+    }
+    .img-profile > span{
+        display: none;
+        position: absolute;
+    }
+    .img-profile:hover > span{
+        display: block;
+        width:50px;height:50px;
+        background: rgba(255,255,255,0.5);
+    }
+ 
+.img-anuncio{
+    width:100px;height:100px;overflow:hidden;
+}
+.img-anuncio > img {
+    width:100px;height:100px;overflow:hidden; 
+}
+.img-anuncio > span {
+    display: none;
+    position: absolute;
+}
+.img-anuncio:hover > span{
+    display: block;
+    width:100px;height:100px;
+    background: rgba(255,255,255,0.5);
+}
