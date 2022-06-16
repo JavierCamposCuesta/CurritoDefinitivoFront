@@ -252,7 +252,6 @@ export class MiPerfilComponent implements OnInit {
           this.mensajePerfilEditadoCorrectamente();
           
           this.conseguirUsuarioRegistrado();
-          location.reload();
 
         },
         error: (err: any) => {

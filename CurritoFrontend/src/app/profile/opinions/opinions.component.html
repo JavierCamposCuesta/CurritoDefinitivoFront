@@ -19,7 +19,10 @@
 
                 <div class="img-profile position-absolute top-50 start-50" [routerLink]="['/public-profile', opinion.anuncio!.autorAnuncio!.id!]">
                   <span></span>
-                  <img class="img-fluid rounded-5 p-1" src={{getImage(opinion.anuncio!.autorAnuncio!.fotoPerfil!)}}>
+                  <img *ngIf="opinion.realizaste == true" class="img-fluid rounded-5 p-1" src={{getImage(opinion.usuarioComentado?.fotoPerfil!)}}>
+                  <img *ngIf="opinion.realizaste == false" class="img-fluid rounded-5 p-1" src={{getImage(opinion.usuarioComentador?.fotoPerfil!)}}>
+
+                  
                 </div>
               </div>
               <div class="col-md-3">
