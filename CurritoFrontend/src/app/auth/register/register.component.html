@@ -92,7 +92,7 @@
           </div>
 
           <!-- Dialogo para indicar el que ha realizado el anuncio -->
-          <p-dialog [(visible)]="dialogoVerificacion"  [responsive]="true" position='center' [style]="{width: '40vw'}">
+          <p-dialog [(visible)]="dialogoVerificacion"  [responsive]="true" position='center' [style]="{width: '40vw'}" [modal]="true" [closeOnEscape]="true" [dismissableMask]="true">
             
             <h5 class="text-center mb-5 pt-0" ><strong>Introduce el código de verificación que hemos enviado a tu correo</strong></h5>
             <form autocomplete="off"  [formGroup]="formCodigo" (ngSubmit) = "verificarUsuario()"  class="row g-3">

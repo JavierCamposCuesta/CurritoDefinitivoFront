@@ -65,7 +65,7 @@
                 class="bi bi-person-circle"
                 style="color: white; font-size: 1.5em"
               ></i> -->
-              <span *ngIf="usuarioRegistrado.nombre != ''">
+              <span>
                 <img *ngIf="this.usuarioRegistrado.fotoPerfil" class="img-fluid rounded-circle p-1" style="width: 50px; height: 50px; margin-top: -3px;" src={{getImage(this.usuarioRegistrado.fotoPerfil!)}} draggable="false">
                 <img *ngIf="!this.usuarioRegistrado.fotoPerfil" class="img-fluid rounded-circle p-1" style="width: 50px; height: 50px; margin-top: -3px; filter: contrast(0%) brightness(300%) ;" src="assets/img/profileDefault.png" draggable="false">
               </span>

@@ -88,7 +88,7 @@
           </p-dialog>
           <!-- Fin dialogo -->
           <!-- Dialogo para añadir un comentario al usuario que realiza el trabajo -->
-          <p-dialog [(visible)]="dialogoComentario"  [responsive]="true" position='center' [style]="{width: '60vw'}" [baseZIndex]="10000" [modal]="true" [closeOnEscape]="true">
+          <p-dialog [(visible)]="dialogoComentario"  [responsive]="true" position='center' [style]="{width: '60vw'}" [baseZIndex]="10000" [modal]="true" [closeOnEscape]="true" [dismissableMask]="true">
             <h3 class="text-center mt-0 pt-0" style="margin-top: -100px; padding-top: -50px;  margin-bottom: 30px;">¿Cómo ha sido tu experiencia con {{solicitante.nombre}} {{solicitante.apellidos}}?</h3>
 
               <form autocomplete="off"  [formGroup]="formComentario" (ngSubmit) = "submitComentario(anuncioComentar.id!, solicitante.email!)"  class="row g-3">
