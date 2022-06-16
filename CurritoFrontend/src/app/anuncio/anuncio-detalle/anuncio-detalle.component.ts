@@ -20,17 +20,10 @@ export class AnuncioDetalleComponent implements OnInit {
     private messageService: MessageService,) {}
 
   anuncioDetalle: Anuncio = {}
-  usuarioRegistrado: Usuario={
-    email: '',
-    password: '',
-    nombre: '',
-    apellidos: '',
-    telefono: '',
-    fechaNacimiento: '',
-    ubicacion: ''
-   };
+  usuarioRegistrado: Usuario={};
 
   ngOnInit(): void {
+    window.scrollTo(0,0)
     this.sacarParametroRuta();
     this.conseguirUsuarioRegistrado();
   }

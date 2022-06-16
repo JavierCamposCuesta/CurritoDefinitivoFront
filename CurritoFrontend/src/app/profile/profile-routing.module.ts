@@ -7,7 +7,6 @@ import { MessagesComponent } from './messages/messages.component';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { MisCurritosComponent } from './mis-curritos/mis-curritos.component';
 import { OpinionsComponent } from './opinions/opinions.component';
-import { PublicProfileComponent } from './public-profile/public-profile.component';
 import { SolicitadosComponent } from './solicitados/solicitados.component';
 
 
@@ -25,7 +24,6 @@ const routes: Routes = [
       component: MessagesComponent,
       loadChildren: () => import('./messages/messages.module').then( m => m.MessagesModule ), canLoad:[AuthGuard]
     },
-    { path: 'public-profile',canActivate:[AuthGuard], component: PublicProfileComponent },
     { path: '**', redirectTo: 'favorites' }
     
 ];

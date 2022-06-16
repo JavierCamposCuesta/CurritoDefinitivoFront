@@ -18,7 +18,6 @@ import {ToastModule} from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
-import { PublicProfileComponent } from './public-profile/public-profile.component';
 import { SolicitadosComponent } from './solicitados/solicitados.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import {RatingModule} from 'primeng/rating';
@@ -38,7 +37,6 @@ import { MessagesModule } from './messages/messages.module';
     OpinionsComponent,
     AddCurritoComponent,
     MiPerfilComponent,
-    PublicProfileComponent,
     SolicitadosComponent
   ],
   imports: [

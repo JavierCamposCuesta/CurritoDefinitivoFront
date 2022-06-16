@@ -11,7 +11,7 @@
             
             <!-- Nombre -->
             <div class="col-md-4">
-              <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
+              <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre" maxlength="15">
               <span class="form-text text-danger"
                           *ngIf="campoNoValido('nombre')">
                         Solo letras
@@ -20,7 +20,7 @@
 
             <!-- Apellidos -->
             <div class="col-md-8">
-              <input type="text" class="form-control" formControlName="apellidos" placeholder="Apellidos" maxlength="50">
+              <input type="text" class="form-control" formControlName="apellidos" placeholder="Apellidos" maxlength="25">
               <span class="form-text text-danger"
                           *ngIf="campoNoValido('apellidos')">
                         Debes introducir apellidos válidos
@@ -65,19 +65,12 @@
             </div>
 
             <!-- Direcccion -->
-            <!-- <div class="col-md-8 text-start">
-              <label for="inputEmail4" class="form-label ms-2">Dirección por defecto</label>
-              <input type="text" class="form-control" formControlName="direccion" placeholder="Dirección">
-              <span class="form-text text-danger"
-                *ngIf="campoNoValido('direccion')">
-                 La dirección es requerida
-                </span>
-            </div> -->
             <div class="col-md-8 text-start">
-              <label for="inputEmail4" class="form-label ms-2">Dirección por defecto</label>
-              <select class="form-select" formControlName="direccion" name="select" [(ngModel)]="domicilioPorDefecto">
+              <label for="inputEmail4" class="form-label ms-2">Ubicación</label>
+                <select class="form-select" formControlName="direccion" name="select"
+                  [(ngModel)]="domicilioPorDefecto">
                   <option *ngFor="let provincia of listaProvincias" value={{provincia.nm}}>{{provincia.nm}}</option>
-              </select>
+                </select>
             </div>
 
             <!-- Nacimiento -->

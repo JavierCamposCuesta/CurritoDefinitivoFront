@@ -82,9 +82,9 @@ export class AnuncioService {
  addAnuncio(anuncio:Anuncio, file:any){
    let url = `${this.baseUrl}/anuncio`;
    
-  if(file === "notFound"){
-    url = `${this.baseUrl}/anuncio/defaultImg`;
-  }
+  // if(file === "notFound"){
+  //   url = `${this.baseUrl}/anuncio/defaultImg`;
+  // }
   const headers = this.cargarHeaders();
 
   const formData: FormData = new FormData();
@@ -95,7 +95,9 @@ export class AnuncioService {
     formData.append('tipoPrecio', anuncio.tipoPrecio!);
     formData.append('descripcion', anuncio.descripcion!);
     formData.append('ubicacion', anuncio.ubicacion!);
-
+  if(file === "notFound"){
+      formData.delete('file');
+    }
     return this.http.post(url, formData, {headers});
 }
 
@@ -104,7 +106,7 @@ export class AnuncioService {
    * @param user 
    * @returns Un observable con el resultado de la petición
    */
-  editAnuncio(anuncio:Anuncio, file:File){
+  editAnuncio(anuncio:Anuncio, file:any){
     const url = `${this.baseUrl}/anuncio/${anuncio.id}`;
     const headers = this.cargarHeaders();
 
@@ -116,7 +118,9 @@ export class AnuncioService {
     formData.append('tipoPrecio', anuncio.tipoPrecio!);
     formData.append('descripcion', anuncio.descripcion!);
     formData.append('ubicacion', anuncio.ubicacion!);
-
+    if(file === "notFound"){
+      formData.delete('file');
+    }
       return this.http.put(url, formData, {headers});
   }
 
@@ -147,7 +151,6 @@ export class AnuncioService {
    * @returns 
    */
      finalizarAnuncio(idAnuncio: number, emailSolicitante: string, textoComentario: string, puntuacionEstrellas: number){
-      console.log(emailSolicitante)
       const url = `${this.baseUrl}/anuncio/${idAnuncio}/finalizar-anuncio`;
       const headers = this.cargarHeaders();
       const formData: FormData = new FormData();
@@ -170,7 +173,6 @@ export class AnuncioService {
   // }
 
   solicitanteAddAnuncio(idAnuncio: number, emailSolicitante: string){
-    console.log(emailSolicitante)
     const url = `${this.baseUrl}/anuncio/${idAnuncio}/finalizar-anuncio/${emailSolicitante}`;
     const headers = this.cargarHeaders();
       return this.http.get(url, {headers});

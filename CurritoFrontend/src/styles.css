@@ -1,4 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+
+
 .navy{
     color: navy;
   }
@@ -35,7 +36,7 @@
   }
 
   .letraResponsiva {
-    font-size: calc(0.7em + 1vw);
+    font-size: calc(0.7em + 0.9vw);
 }
 
 .letraResponsivaDescripcion {
@@ -62,8 +63,14 @@
  font-size: 2em;
 }
 
-  
-  
+.swal2-container{
+  z-index: 99999999 !important;
+}
+
+.punteroBoton{
+  cursor: pointer;
+}
+
 
   @media (min-width: 992px){
     .profileAdapterlg{

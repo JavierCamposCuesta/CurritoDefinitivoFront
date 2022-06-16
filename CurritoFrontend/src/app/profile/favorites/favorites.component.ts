@@ -1,6 +1,8 @@
+import { Byte } from '@angular/compiler/src/util';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Anuncio } from 'src/app/interfaces/interface';
 import { AnuncioService } from 'src/app/services/anuncio.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-favorites',
@@ -9,7 +11,7 @@ import { AnuncioService } from 'src/app/services/anuncio.service';
 })
 export class FavoritesComponent implements OnInit {
 
-  constructor(private anuncioService: AnuncioService) { }
+  constructor(private anuncioService: AnuncioService, private usuarioService:UsuarioService) { }
   anunciosFavoritos:Anuncio[]=[];
 
   ngOnInit(): void {
@@ -32,6 +34,15 @@ export class FavoritesComponent implements OnInit {
 
     
   }
+
+  /**
+   * Método que llama a getImage del servicio y transforma un array de bytes en una url correspondiente a una imagen
+   * @param file
+   * @returns
+   */
+ getImage(file: Byte[]) {
+  return this.usuarioService.getImage(file);
+}
 
   
 /**

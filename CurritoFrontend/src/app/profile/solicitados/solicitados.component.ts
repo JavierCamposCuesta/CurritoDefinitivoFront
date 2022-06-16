@@ -13,6 +13,7 @@ export class SolicitadosComponent implements OnInit {
   constructor(private anuncioService: AnuncioService) { }
 
   ngOnInit(): void {
+    window.scrollTo(0,0)
     this.misAnunciosRealizados();
     this.misAnunciosSolicitados();
   }

@@ -7,6 +7,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { HomeComponent } from './home/home/home.component';
 import { FavoritesComponent } from './profile/favorites/favorites.component';
 import { ProfileComponent } from './profile/profile.component';
+import { PublicProfileComponent } from './publicProfile/public-profile.component';
 import { AuthGuard } from './services/auth-guard.service';
 
 
@@ -33,6 +34,16 @@ const routes: Routes = [
   path: 'profile',
   component: ProfileComponent,
   loadChildren: () => import('./profile/profile.module').then( m => m.ProfileModule ), canLoad:[AuthGuard]
+},
+{ 
+  path: 'public-profile/:id',
+  component: PublicProfileComponent,
+  loadChildren: () => import('./publicProfile/public-profile.module').then( m => m.PublicProfileModule )
+},
+{ 
+  path: 'public-profile',
+  component: PublicProfileComponent,
+  loadChildren: () => import('./publicProfile/public-profile.module').then( m => m.PublicProfileModule )
 },
 {
   path: 'anuncio',

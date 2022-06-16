@@ -10,15 +10,15 @@
           <div class="d-flex row">
             <div class="d-flex row">
               <div class="col-6 col-sm-8" style="padding-left: 1.5em; padding-right: 1.5em; height: 150px;" [routerLink]="['/anuncio-detalle', anuncio.id]">
-                <div class=" text-center" style="height: 100%;">
+                <div class=" text-center d-flex align-items-center" style="height: 100%;">
                 <img *ngIf="getImage(anuncio.file!)!= null"
                 src={{getImage(anuncio.file!)}}
                 style="max-height: 145px; width: auto;"
-                alt="Imagen" class=" p-2 mt-auto mb-auto img-fluid">
+                alt="Imagen" class=" p-2 ms-auto me-auto img-fluid" draggable="false">
                 <img *ngIf="getImage(anuncio.file!)== null"
                 src="../../../assets/img/default.png"
                 style="max-height: 145px; width: auto;"
-                alt="Imagen" class=" p-2 mt-auto mb-auto img-fluid">
+                alt="Imagen" class=" p-2 me-auto ms-auto img-fluid" draggable="false">
               </div>
               </div>
             <div class="col-6 col-sm-4 navy">
@@ -45,5 +45,5 @@
   </div>
 
   <div class="d-flex text-center p-5 row w-100">
-    <a href="#" class="text-decoration-none" style="color: navy" [routerLink]="['/anuncio']">Ver más...</a>
+    <a class="text-decoration-none" style="color: navy" [routerLink]="['/anuncio']">Ver más...</a>
   </div>

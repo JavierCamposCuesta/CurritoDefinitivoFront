@@ -28,44 +28,55 @@
     </div>
     <div class="col-2 col-md-2 text-center" style="height: 65px;">
       
-      <a href="" class="p-2 text-decoration-none text-white" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" role="navigation">
+      <a href="" class="p-2 text-decoration-none text-white" data-bs-toggle="offcanvas" toggle data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" role="navigation">
         <i class="bi bi-person-circle" style="color: white; font-size: 1.5em"></i>
         <h6>Perfil</h6>
       </a>
 
-      <div class="offcanvas offcanvas-end navy" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas offcanvas-end navy" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" >
         <div class="offcanvas-header">
           <h5 id="offcanvasRightLabel">Menú Perfil</h5>
           <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <a [routerLink]="['profile/my-profile']" class="p-2 text-decoration-none d-flex navy">
-                <i class="bi bi-person-circle" style="font-size: 1.5em"></i>
-                <h6 class="p-2">Perfil</h6>
+            <a [routerLink]="['profile/my-profile']" routerLinkActive="active" class=" p-2 text-decoration-none d-flex navy">
+                <!-- <i class="bi bi-person-circle" style="font-size: 1.5em"></i>
+                <h6 class="p-2">Perfil</h6> -->
+                <span>
+                  <img *ngIf="this.usuarioRegistrado.fotoPerfil" class="img-fluid rounded-circle p-1" style="width: 50px; height: 40px; margin-top: 10px; margin-left: -10px;" src={{getImage(this.usuarioRegistrado.fotoPerfil!)}} draggable="false">
+                  <img *ngIf="!this.usuarioRegistrado.fotoPerfil" class="img-fluid rounded-circle p-1" style="width: 50px; height: 40px; margin-top: 10px; margin-left: -10px;" src="../../../assets/img/profileDefault.png" draggable="false">
+
+                </span>
+                <span class="fs-6 mt-3 p-1">Mi Perfil</span>
+                <div class="position-absolute" style="margin-top: 20px; margin-left: 110px;">
+                  <p-rating ngModel="{{usuarioRegistrado.puntuacionMedia}}" [cancel]="false" [readonly]="true"></p-rating>
+                  <span class="position-absolute" style="margin-top: -25px; margin-left: 65px; color: rgb(90, 90, 90);">({{this.usuarioRegistrado.numeroValoraciones}})</span>
+                  
+                </div>
             </a>
-            <a href="#" class="p-2 text-decoration-none d-flex navy" [routerLink]="['profile/notification']">
-              <i class="bi bi-bell" style="font-size: 1.5em"></i>
-              <h6 class="p-2">Notificaciones</h6>
-          </a>
-          <a href="#" class="p-2 text-decoration-none d-flex navy" [routerLink]="['profile/favorites']">
-            <i class="bi bi-bookmark-heart" style="font-size: 1.5em"></i>
-            <h6 class="p-2">Mis Favoritos</h6>
-        </a>
             <a [routerLink]="['profile/misCurritos']" class="p-2 text-decoration-none d-flex navy">
-                <i class="bi bi-emoji-sunglasses" style="font-size: 1.5em"></i>
-                <h6 class="p-2">Mis Currito's</h6>
+              <i class="bi bi-emoji-sunglasses" style="font-size: 1.5em"></i>
+              <h6 class="p-2">Mis Currito's</h6>
             </a>
             <a [routerLink]="['profile/curritos-solicitados']" class="p-2 text-decoration-none d-flex navy">
               <i class="bi bi-sunglasses" style="font-size: 1.5em"></i>
               <h6 class="p-2">Currito's solicitados</h6>
+            </a>
+            <a [routerLink]="['profile/favorites']" routerLinkActive="active" class="p-2 text-decoration-none d-flex navy" [routerLink]="['profile/favorites']">
+              <i class="bi bi-bookmark-heart" style="font-size: 1.5em"></i>
+              <h6 class="p-2">Mis Favoritos</h6>
+            </a>
+            <a [routerLink]="['profile/notification']" routerLinkActive="active"  class="p-2 text-decoration-none d-flex navy" [routerLink]="['profile/notification']">
+              <i class="bi bi-bell" style="font-size: 1.5em"></i>
+              <h6 class="p-2">Notificaciones</h6>
           </a>
-            <a href="#" class="p-2 text-decoration-none d-flex navy" [routerLink]="['profile/opinions']">
+            <a [routerLink]="['profile/opinions']" routerLinkActive="active" class="p-2 text-decoration-none d-flex navy" [routerLink]="['profile/opinions']">
                 <i class="bi bi-star-half" style="font-size: 1.5em"></i>
                 <h6 class="p-2">Opiniones</h6>
             </a>
             
             <div class="d-flex fixed-bottom justify-content-end">
-                <a href="#" class="p-2 text-decoration-none d-flex navy">
+                <a href="#" (click)="cerrarSesion()" class="p-2 text-decoration-none d-flex navy">
                     <h6 class="p-2">Cerrar sesión</h6>
                     <i class="bi bi-door-open" style="font-size: 1.5em"></i>
                 </a>

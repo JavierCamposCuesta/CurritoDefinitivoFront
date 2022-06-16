@@ -6,11 +6,15 @@
       {{usuarioRegistrado.nombre?.charAt(0)?.toUpperCase()}}{{usuarioRegistrado.nombre?.slice(1)}}
       {{usuarioRegistrado.apellidos?.charAt(0)?.toUpperCase()}}</h3>
     <hr class="p-1" style="color: lightblue;">
-    <h4 class="gray6 text-start">Datos del perfil:</h4>
+    <div class="row">
+      <h4 class="gray6 text-start col-6">Datos del perfil:</h4>
+      <a [routerLink]="['/public-profile', usuarioRegistrado.id]" class="col-6 fst-italic text-end" style="text-decoration: none;">Ver perfil público</a>
+
+    </div>
     <!-- Nombre -->
     <div class="col-md-4">
       <label for="nombre" class="form-label ms-2">Nombre:</label>
-      <input type="text" class="form-control" formControlName="nombre">
+      <input type="text" class="form-control" formControlName="nombre" maxlength="15">
       <span class="form-text text-danger" *ngIf="campoNoValido('nombre')">
         Sólo letras
       </span>
@@ -19,7 +23,7 @@
     <!-- Apellidos -->
     <div class="col-md-8">
       <label for="apellidos" class="form-label ms-2">Apellidos:</label>
-      <input type="text" class="form-control" formControlName="apellidos">
+      <input type="text" class="form-control" formControlName="apellidos" maxlength="25">
       <span class="form-text text-danger" *ngIf="campoNoValido('apellidos')">
         Sólo letras
       </span>
@@ -43,11 +47,12 @@
 
     <!-- Direcccion -->
     <div class="col-md-12 text-start">
-      <label for="inputEmail4" class="form-label ms-2">Dirección:</label>
-      <input type="text" class="form-control" formControlName="ubicacion">
-      <span class="form-text text-danger" *ngIf="campoNoValido('ubicacion')">
-        La dirección es requerida
-      </span>
+      
+      <label for="inputEmail4" class="form-label ms-2">Ubicación</label>
+      <select class="form-select" formControlName="ubicacion" name="select"
+        [(ngModel)]="usuarioRegistrado.ubicacion">
+        <option *ngFor="let provincia of listaProvincias" value={{provincia.nm}}>{{provincia.nm}}</option>
+      </select>
     </div>
 
     <!-- Nacimiento -->
@@ -58,22 +63,22 @@
 
     <div class="col-md-12 row">
       <label class="form-label mt-3 text-center gray5 pt-3">Selecciona nueva foto de perfil</label>
-      <div class="image-upload text-center">
+      <div class="image-upload text-center" style="overflow: hidden;">
         <!-- <label for="file-input">
           <i class="bi bi-image navy" alt="Click aquí para subir tu foto" title="Click aquí para subir tu foto"></i>
         </label> -->
-        <input id="file-input" type="file" (change)="selectFile($event)" />
-        <img *ngIf="previsualizarImagen==''" class="img-fluid rounded-circle p-5 text-center" style="max-height: 200px;"
-          src={{getImage(usuarioRegistrado.fotoPerfil!)}} alt="foto de perfil">
-        <img *ngIf="previsualizarImagen!=''" class="img-fluid rounded-circle p-5 text-center" style="max-height: 200px;"
-          src={{previsualizarImagen}} alt="foto de perfil">
+        <input id="file-input" type="file" (change)="selectFile($event)" accept="image/*"/>
+        <img *ngIf="previsualizarImagen==''" class="img-fluid rounded-circle p-5 text-center" style="height: 250px; width: 250px;"
+        src="../../../assets/img/profileDefault.png" alt="foto de perfil" draggable="false">
+        <img *ngIf="previsualizarImagen!=''" class="img-fluid rounded-circle p-5 text-center" style="height: 250px; width: 250px;"
+          src={{previsualizarImagen}} alt="foto de perfil" draggable="false">
       </div>
 
 
     </div>
 
     <div class="w-100 text-center">
-      <input type="submit" class="btn rounded-3 w-25 navyBg text-white" value="Guardar"
+      <input type="submit" class="btn rounded-3  navyBg text-white ps-5 pe-5" value="Guardar"
         [disabled]="!miFormularioDatosPerfil.valid">
     </div>
   </form>
@@ -115,7 +120,7 @@
     </div>
 
     <div class="w-100 text-center">
-      <input type="submit" class="btn rounded-3 w-25 navyBg text-white" value="Guardar">
+      <input type="submit" class="btn rounded-3 ps-5 pe-5 navyBg text-white" value="Guardar">
     </div>
 
   </form>
@@ -124,101 +129,7 @@
 
 
 
-  <!-- <section class="vh-75 my-3">
-      <div class="py-1 h-75">
-        <div class="row d-flex justify-content-center align-items-center h-75 w-100  ms-auto me-auto">
-          <div class="col-12 col-sm-12 col-md-8 col-lg-11 col-xl-10">
-            <div class="card d-flex shadow" style="border: 1px solid lightblue;">
-              <div class="card-body p-5 pe-0 text-center row row-cols-sm-1 row-cols-md.2 row-cols-lg-2 w-100 justify-content-center">
-    
-                <div class="col w-25">
-                  <div class="p-3">
-                    <img class="img-fluid rounded-circle" src="https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2018/08/fotos-perfil-whatsapp_16.jpg?itok=fl2H3Opv" alt="foto de perfil">
-                  </div>
-                  <a href="#" class="btn btn-success">Cambiar foto</a>
-                </div>
-    
-                <form class="col w-75" autocomplete="off"  [formGroup]="miFormulario" (ngSubmit) = "submitFormulario()"  class="row g-3">
-                
-                Nombre
-                <div class="col-md-4">
-                  <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
-                  <span class="form-text text-danger"
-                              *ngIf="campoNoValido('nombre')">
-                            Solo letras
-                  </span>
-                </div>
-    
-                Apellidos
-                <div class="col-md-8">
-                  <input type="text" class="form-control" formControlName="apellidos" placeholder="Apellidos">
-                  <span class="form-text text-danger"
-                              *ngIf="campoNoValido('apellidos')">
-                            Debes introducir dos apellidos
-                  </span>
-                </div>
-    
-                Email
-                <div class="col-md-8">
-                  <input type="email" class="form-control" formControlName="email" placeholder="Email">
-                  <span class="form-text text-danger"
-                              *ngIf="campoNoValido('email')">
-                            {{ emailErrorMsg }}
-                  </span>
-                  
-                </div>
-    
-                Telefono
-                <div class="col-md-4">
-                  <input type="text" class="form-control" formControlName="telefono" placeholder="Teléfono">
-                  <span class="form-text text-danger"
-                              *ngIf="campoNoValido('telefono')">
-                            Deben ser 9 dígitos.
-                  </span>
-                </div>
-    
-                Password
-                <div class="col-md-6">
-                  <input type="password" class="form-control" formControlName="password" placeholder="Contraseña">
-                  <span class="form-text text-danger"
-                              *ngIf="campoNoValido('password')">
-                            La contraseña debe de ser mayor de 6 caracteres.
-                  </span>
-                </div>
-    
-                Password2
-                <div class="col-md-6">
-                  <input type="password" class="form-control" formControlName="password2" placeholder="Confirma contraseña">
-                  <span class="form-text text-danger"
-                    *ngIf="campoNoValido('password2')">
-                    Las contraseñas deben de ser iguales
-                    </span>
-                </div>
-    
-                Direcccion
-                <div class="col-md-8 text-start">
-                  <label for="inputEmail4" class="form-label ms-2">Dirección por defecto</label>
-                  <input type="text" class="form-control" formControlName="direccion" placeholder="Dirección">
-                  <span class="form-text text-danger"
-                    *ngIf="campoNoValido('direccion')">
-                    La dirección es requerida
-                    </span>
-                </div>
-    
-                Nacimiento
-                <div class="col-md-4 text-start">
-                  <label for="inputPassword4" class="form-label ms-2">Nacimiento</label>
-                  <input type="date" class="form-control" formControlName="nacimiento">
-                
-                </div>
-                
-              </form>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section> -->
+ <!-- Este es el mensaje cuando se realiza alguna acción -->
+ <p-toast position="bottom-center" ></p-toast>
 
 </div>

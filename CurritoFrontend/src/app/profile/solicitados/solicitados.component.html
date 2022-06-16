@@ -31,8 +31,8 @@
           </ng-template>
           <ng-template pTemplate="body" let-anuncio let-columns="anuncio">
               <tr>
-                <td *ngIf="getImage(anuncio.file)== null" class="my-sm-3"><img src="../../../assets/img/default.png" alt="Imagen" style="width:50px;height:50px;overflow:hidden" /></td>
-                <td *ngIf="getImage(anuncio.file)!= null" class="my-sm-3"><img src={{getImage(anuncio.file)}} alt="Imagen" style="width:50px;height:50px;overflow:hidden" /></td>
+                <td *ngIf="getImage(anuncio.file)== null" class="my-sm-3"><img src="../../../assets/img/default.png" alt="Imagen" style="width:50px;height:50px;overflow:hidden" draggable="false"/></td>
+                <td *ngIf="getImage(anuncio.file)!= null" class="my-sm-3"><img src={{getImage(anuncio.file)}} alt="Imagen" style="width:50px;height:50px;overflow:hidden" draggable="false"/></td>
                   <td [routerLink]="['/anuncio-detalle', anuncio.id]" class='textoConPuntos ' ><span class="p-column-title" pSortableColumn="titulo"><strong>Título</strong></span>{{anuncio.titulo}}</td>
                   <td [routerLink]="['/anuncio-detalle', anuncio.id]"><span class="p-column-title" pSortableColumn="categoria"><strong>Categoría</strong></span>{{anuncio.categoria}}</td>
                   <td [routerLink]="['/anuncio-detalle', anuncio.id]"><span class="p-column-title" pSortableColumn="precio"><strong>Precio</strong></span>{{anuncio.precio}} €</td>

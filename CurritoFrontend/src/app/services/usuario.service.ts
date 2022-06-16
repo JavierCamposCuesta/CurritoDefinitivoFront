@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Byte } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Usuario } from '../interfaces/interface';
+import { Anuncio, Comentario, Usuario } from '../interfaces/interface';
 
 @Injectable({
   providedIn: 'root'
@@ -43,12 +43,12 @@ constructor(private http: HttpClient) { }
     }
   }
 
-  updateProfile(user:Usuario, file:any, idUsuario:string){
-    let url = `${this.baseUrl}/profile/update/${idUsuario}`;
+  updateProfile(user:Usuario, file:any){
+    let url = `${this.baseUrl}/profile/update`;
 
-    if (file==="NotSelected") {
-      url = `${this.baseUrl}/profile/updateDefaultImage/${idUsuario}`;
-    }
+    // if (file==="NotSelected") {
+    //   url = `${this.baseUrl}/profile/updateDefaultImage`;
+    // }
 
     const headers = this.cargarHeaders();
     const formData: FormData = new FormData();
@@ -58,7 +58,10 @@ constructor(private http: HttpClient) { }
       formData.append('telefono', user.telefono!);
       formData.append('ubicacion', user.ubicacion!);
 
-      console.log("fsdf")
+      if (file==="NotSelected") {
+        formData.delete('imagenProfile');
+      }
+
       return this.http.put<Usuario>(url, formData, {headers});
   }
 
@@ -73,6 +76,30 @@ constructor(private http: HttpClient) { }
       formData.append('passwordNew2', passEdit.passwordNew2);
 
       return this.http.put<Usuario>(url, formData, {headers});
+  }
+
+  mostrarUsuarioPerfil(id: any){
+  
+    const url = `${this.baseUrl}/usuario/${id}`;
+    return this.http.get<Usuario>(url);
+  }
+
+  mostrarAnunciosOfertadosPerfil(id: any){
+  
+    const url = `${this.baseUrl}/usuario/${id}/anuncios-ofertados`;
+    return this.http.get<Anuncio[]>(url);
+  }
+
+  /**
+   * Método para pedir todas las opiniones
+   * @returns lista con todas las opiniones
+   */
+   mostrarOpinionesUsuario(id:number){
+    const url = `${this.baseUrl}/usuario/${id}/opiniones`;
+
+    const headers = this.cargarHeaders();
+      return this.http.get<Comentario[]>(url);
+    
   }
 
 

@@ -43,8 +43,8 @@
           </ng-template>
           <ng-template pTemplate="body" let-anuncio let-columns="anuncio">
               <tr>
-                <td *ngIf="getImage(anuncio.file)== null" class="my-sm-3"><img src="../../../assets/img/default.png" alt="Imagen" style="width:50px;height:50px;overflow:hidden" /></td>
-                <td *ngIf="getImage(anuncio.file)!= null" class="my-sm-3"><img src={{getImage(anuncio.file)}} alt="Imagen" style="width:50px;height:50px;overflow:hidden" /></td>
+                <td *ngIf="getImage(anuncio.file)== null" class="my-sm-3"><img src="../../../assets/img/default.png" alt="Imagen" style="width:50px;height:50px;overflow:hidden" draggable="false"/></td>
+                <td *ngIf="getImage(anuncio.file)!= null" class="my-sm-3"><img src={{getImage(anuncio.file)}} alt="Imagen" style="width:50px;height:50px;overflow:hidden" draggable="false"/></td>
                   <td [routerLink]="['/anuncio-detalle', anuncio.id]" class='textoConPuntos ' ><span class="p-column-title" pSortableColumn="titulo"><strong>Título</strong></span>{{anuncio.titulo}}</td>
                   <td [routerLink]="['/anuncio-detalle', anuncio.id]"><span class="p-column-title" pSortableColumn="categoria"><strong>Categoría</strong></span>{{anuncio.categoria}}</td>
                   <td [routerLink]="['/anuncio-detalle', anuncio.id]"><span class="p-column-title" pSortableColumn="precio"><strong>Precio</strong></span>{{anuncio.precio}} €</td>
@@ -52,43 +52,43 @@
                   <td class="ocultarMenor680" (click)="seleccionarEventoEditar(anuncio)"><span class="p-column-title " >Editar</span><a class="btn"><i class="bi bi-pencil-fill focusEditar"></i></a></td>
                   <td class="ocultarMenor680" (click)="confirm1(anuncio.id)"><span class="p-column-title ">Borrar</span><a class="btn"><i class="bi bi-trash-fill focusBorrar"></i></a></td>
 
-                  <td class="ocultarMenor680" (click)="showBasicDialog2(anuncio.id)"><span class="p-column-title ">Finalizado</span><a class="btn"><i class="bi bi-check2-square focusFinalizado">
+                  <td class="ocultarMenor680" (click)="showBasicDialog2(anuncio.id, anuncio)"><span class="p-column-title ">Finalizado</span><a class="btn"><i class="bi bi-check2-square focusFinalizado">
                   </i></a></td>
                   <td class=" justify-content-evenly ocultarMayor679">
                     <a class="btn fs-5" (click)="seleccionarEventoEditar(anuncio)"><i class="bi bi-pencil-fill focusEditar"></i></a>
                     <a class="btn fs-5" (click)="borrarAnuncio(anuncio.id)"><i class="bi bi-trash-fill focusBorrar"></i></a>
-                    <a class="btn fs-5" (click)="showBasicDialog2(anuncio.id)"><i class="bi bi-check2-square focusFinalizado"></i></a>
+                    <a class="btn fs-5" (click)="showBasicDialog2(anuncio.id, anuncio)"><i class="bi bi-check2-square focusFinalizado"></i></a>
                   </td>
               </tr>
 
-              <!-- Dialogo para indicar el que ha realizado el anuncio -->
-              <p-dialog [(visible)]="displayBasic2"  [responsive]="true" position='center' [style]="{width: '40vw'}" [modal]="true" [closeOnEscape]="true" [dismissableMask]="true">
-                <h5 class="text-center mt-0 pt-0" *ngIf="this.listaSolicitantes.length ==0; ">Ningún usuario ha solicitado el anuncio</h5>
-                <h5 class="text-center mt-0 pt-0" style="margin-top: -80px; padding-top: -50px;" *ngIf="this.listaSolicitantes.length >0;">¿Qué usuario ha realizado el anuncio?</h5>
               
-                  <!-- borrar -  forma antigua de hacerlo, lo dejo de muestra -->
-                  <!-- <li class="solicitante text-center" *ngFor="let solicitante of listaSolicitantes" (click)="finalizarAnuncio(anuncio.id)" (click)="solicitanteAddAnuncio(anuncio.id, solicitante.email)">
-                    {{solicitante.nombre}} {{solicitante.apellidos}}
-                  </li> -->
-                  <li class="solicitante text-center" *ngFor="let solicitante of listaSolicitantes" (click)="showDialogoComentario(anuncio, solicitante)">
-                    {{solicitante.nombre}} {{solicitante.apellidos}}
-                  </li>
-                
-              
-                
-                <ng-template pTemplate="footer">
-                    <!-- <p-button icon="pi pi-times" (click)="closeBasicDialog2()" label="Cerrar" styleClass="p-button-text"></p-button> -->
-                </ng-template>
-              </p-dialog>
-              <!-- Fin dialogo -->
-
               
             </ng-template>
-
+            
           </p-table>
-
+          
+          <!-- Dialogo para indicar el que ha realizado el anuncio -->
+          <p-dialog [(visible)]="displayBasic2"  [responsive]="true" position='center' [style]="{width: '40vw'}" [modal]="true" [closeOnEscape]="true" [dismissableMask]="true">
+            <h5 class="text-center mt-0 pt-0" *ngIf="this.listaSolicitantes.length ==0; ">Ningún usuario ha solicitado el anuncio</h5>
+            <h5 class="text-center mt-0 pt-0" style="margin-top: -80px; padding-top: -50px;" *ngIf="this.listaSolicitantes.length >0;">¿Qué usuario ha realizado el anuncio?</h5>
+          
+              <!-- borrar -  forma antigua de hacerlo, lo dejo de muestra -->
+              <!-- <li class="solicitante text-center" *ngFor="let solicitante of listaSolicitantes" (click)="finalizarAnuncio(anuncio.id)" (click)="solicitanteAddAnuncio(anuncio.id, solicitante.email)">
+                {{solicitante.nombre}} {{solicitante.apellidos}}
+              </li> -->
+              <li class="solicitante text-center" *ngFor="let solicitante of listaSolicitantes" (click)="showDialogoComentario(anuncioFinalizar, solicitante)">
+                {{solicitante.nombre}} {{solicitante.apellidos}}
+              </li>
+            
+          
+            
+            <ng-template pTemplate="footer">
+                <!-- <p-button icon="pi pi-times" (click)="closeBasicDialog2()" label="Cerrar" styleClass="p-button-text"></p-button> -->
+            </ng-template>
+          </p-dialog>
+          <!-- Fin dialogo -->
           <!-- Dialogo para añadir un comentario al usuario que realiza el trabajo -->
-          <p-dialog [(visible)]="dialogoComentario"  [responsive]="true" position='center' [style]="{width: '60vw'}" [baseZIndex]="10000" [modal]="true" [closeOnEscape]="true" [dismissableMask]="true">
+          <p-dialog [(visible)]="dialogoComentario"  [responsive]="true" position='center' [style]="{width: '60vw'}" [baseZIndex]="10000" [modal]="true" [closeOnEscape]="true">
             <h3 class="text-center mt-0 pt-0" style="margin-top: -100px; padding-top: -50px;  margin-bottom: 30px;">¿Cómo ha sido tu experiencia con {{solicitante.nombre}} {{solicitante.apellidos}}?</h3>
 
               <form autocomplete="off"  [formGroup]="formComentario" (ngSubmit) = "submitComentario(anuncioComentar.id!, solicitante.email!)"  class="row g-3">
@@ -99,7 +99,7 @@
                 <p-rating formControlName="puntuacionEstrellas" [cancel]="false"></p-rating>
 
                 <h5 class="text-center mt-2 pt-0" >Cuéntanos que tal ha ido</h5>
-                <textarea class="col-12 mb-4" formControlName="textoComentario" placeholder="Escribe un breve resumen de tu experiencia"></textarea>
+                <textarea class="col-12 mb-4" formControlName="textoComentario" placeholder="Escribe un breve resumen de tu experiencia" maxlength="500"></textarea>
                 <button class="btn btn-primary btn-lg btn-block w-50 ms-auto me-auto" type="submit" [disabled]="!formComentario.valid">Valorar</button>
               </div>
               <div>
@@ -145,8 +145,8 @@
           </ng-template>
           <ng-template pTemplate="body" let-anuncioTerminado let-columns="anuncio">
               <tr>
-                <td *ngIf="getImage(anuncioTerminado.file)== null" class="my-sm-3"><img src="../../../assets/img/default.png" alt="Imagen" style="width:50px;height:50px;overflow:hidden" /></td>
-                <td *ngIf="getImage(anuncioTerminado.file)!= null" class="my-sm-3"><img src={{getImage(anuncioTerminado.file)}} alt="Imagen" style="width:50px;height:50px;overflow:hidden" /></td>
+                <td *ngIf="getImage(anuncioTerminado.file)== null" class="my-sm-3"><img src="../../../assets/img/default.png" alt="Imagen" style="width:50px;height:50px;overflow:hidden" draggable="false"/></td>
+                <td *ngIf="getImage(anuncioTerminado.file)!= null" class="my-sm-3"><img src={{getImage(anuncioTerminado.file)}} alt="Imagen" style="width:50px;height:50px;overflow:hidden" draggable="false"/></td>
                   <td ><span class="p-column-title" pSortableColumn="titulo"><strong>Título</strong></span>{{anuncioTerminado.titulo}}</td>
                   <td><span class="p-column-title" pSortableColumn="categoria"><strong>Categoría</strong></span>{{anuncioTerminado.categoria}}</td>
                   <td><span class="p-column-title" pSortableColumn="precio"><strong>Precio</strong></span>{{anuncioTerminado.precio}} €</td>
@@ -165,7 +165,7 @@
       </div>
     </div>
 
-    <!-- Este es el mensaje cuando se clickea el boton de borrar anuncio -->
+    <!-- Este es el mensaje cuando se realiza alguna acción -->
     <p-toast position="bottom-center" ></p-toast>
     
    

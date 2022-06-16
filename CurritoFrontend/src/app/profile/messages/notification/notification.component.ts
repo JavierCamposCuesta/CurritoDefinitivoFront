@@ -17,6 +17,7 @@ export class NotificationComponent implements OnInit {
     private messageService: MessageService) { }
 
   ngOnInit(): void {
+    window.scrollTo(0,0)
     this.conseguirComentariosPendientes();
   }
 
@@ -39,9 +40,9 @@ export class NotificationComponent implements OnInit {
      }
    })
   }
-
-  showDialogoComentario() {
-    
+comentario:Comentario = {}
+  showDialogoComentario(comentario:Comentario) {
+    this.comentario = comentario;
     this.dialogoComentario = true;
   }
   

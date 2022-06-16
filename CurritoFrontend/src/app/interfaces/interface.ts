@@ -24,6 +24,7 @@ export interface LoginRespuesta {
 }
 
 export interface Usuario {
+    id?: number;
     email?: string;
     password?: string;
     nombre?: string;
@@ -32,6 +33,8 @@ export interface Usuario {
     fechaNacimiento?: string;
     ubicacion?: string;
     fotoPerfil?: Byte[];
+    puntuacionMedia?: number;
+    numeroValoraciones?: number;
 }
 
 // export interface Anuncio {

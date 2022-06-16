@@ -161,28 +161,6 @@ confirm1(idAnuncio: number) {
   });
 }
 
-
-
-// /**
-//  * Este metodo se llamará cuando se pulse el boton de finalizar anuncio, se llamará al servicio de anuncio y segun la respuesta se 
-//  * mostrará el mensaje correspondiente
-//  * @param idAnuncio 
-//  */
-// finalizarAnuncio(idAnuncio: number){
-//   this.anuncioService.finalizarAnuncio(idAnuncio).subscribe({
-          
-//     next:resp => {
-//       this.showSuccessFinalizarAnuncio()
-//       this.misAnuncios();
-//       this.misAnunciosTerminados();
-      
-//    },
-//    error: error =>{
-//     this.showErrorFinalizarAnuncio();
-//    } 
-//  })
-// }
-
 /**
  * Este metodo se llamará cuando se pulse el boton de finalizar anuncio, se llamará al servicio de anuncio y segun la respuesta se 
  * mostrará el mensaje correspondiente
@@ -211,7 +189,7 @@ confirm1(idAnuncio: number) {
   this.formComentario.markAllAsTouched();
   if(this.formComentario.valid){
     this.finalizarAnuncio(idAnuncio, emailSolicitante, this.formComentario.get("textoComentario")?.value, this.formComentario.get("puntuacionEstrellas")?.value);
-
+    this.formComentario.reset();
   }
   else{
     Swal.fire({
@@ -238,20 +216,6 @@ solicitanteAddAnuncio(idAnuncio: number, emailSolicitante: string){
    } 
  })
 }
-// finalizarAnuncio(idAnuncio: number, emailSolicitante:string){
-//   this.anuncioService.finalizarAnuncio(idAnuncio,  emailSolicitante).subscribe({
-          
-//     next:resp => {
-//       this.showSuccessFinalizarAnuncio()
-//       this.misAnuncios();
-//       this.misAnunciosTerminados();
-      
-//    },
-//    error: error =>{
-//     this.showErrorFinalizarAnuncio();
-//    } 
-//  })
-// }
 
 /**
  * Método para cargar la lista de solicitantes de un anuncio
@@ -261,7 +225,6 @@ cargarListaSolicitantes(idAnuncio: number){
   this.anuncioService.cargarListaSolicitantes(idAnuncio).subscribe({
           
     next:resp => {
-      console.log(resp)
       this.listaSolicitantes = resp;
       
    },
@@ -274,8 +237,10 @@ cargarListaSolicitantes(idAnuncio: number){
 // asignarAnuncioSolicitante(idSolicitante: string, idAnuncio: number){
 // this.anuncioService.asignarAnuncioSolicitante(idSolicitante, idAnuncio)
 // }
+anuncioFinalizar:Anuncio={};
 
-showBasicDialog2(idAnuncio: number) {
+showBasicDialog2(idAnuncio: number, anuncioFinalizar:Anuncio) {
+  this.anuncioFinalizar = anuncioFinalizar;
   this.cargarListaSolicitantes(idAnuncio);
   this.displayBasic2 = true;
 }
@@ -295,18 +260,6 @@ closeDialogoComentario() {
   this.dialogoComentario = false;
 }
 
-
-/**
- * Metodo para elegir el solicitante que ha realizado el anuncio
- */
-// elegirSolicitante(idAnuncio: Anuncio) {
-//   this.confirmationService.confirm({
-//       message: 'Are you sure that you want to perform this action?',
-//       accept: () => {
-//           //Actual logic to perform a confirmation
-//       }
-//   });
-// }
 
 //MENSAJES
 

@@ -1,4 +1,4 @@
-<div class="p-5 content-section implementation carousel-demo">
+<div class="m-md-5 m-lg-5 pt-5 pb-5 content-section implementation carousel-demo">
     <div class="card" style="border: 0px" >
       <p-carousel
         [value]="listaCategorias.data"
@@ -16,7 +16,7 @@
         <ng-template let-categoria pTemplate="item" >
           <div class="item text-center" >
             <a
-              href="#"
+            routerLink="anuncio/{{categoria.nombre}}"
               class="text-decoration-none text-center navy"
             >
               <!-- <i class="pi {{categoria.icono}}" style="font-size: 2rem"></i> -->

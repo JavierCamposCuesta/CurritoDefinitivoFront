@@ -6,7 +6,7 @@ import { MessageService, SharedModule } from 'primeng/api';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import { FormsModule } from '@angular/forms';
 import {SliderModule} from 'primeng/slider';
-
+import {RatingModule} from 'primeng/rating';
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -38,7 +38,8 @@ import { ToastModule } from 'primeng/toast';
     ButtonModule,
     AppRoutingModule,
     DialogModule,
-    ToastModule
+    ToastModule,
+    RatingModule
     
 
   ],

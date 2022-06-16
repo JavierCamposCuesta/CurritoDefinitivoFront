@@ -17,6 +17,8 @@ import { FormsModule } from '@angular/forms';
 import {DialogModule} from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessagesModule } from './profile/messages/messages.module';
+import {RatingModule} from 'primeng/rating';
+import { PublicProfileModule } from './publicProfile/public-profile.module';
 
 
 
@@ -41,7 +43,9 @@ import { MessagesModule } from './profile/messages/messages.module';
     FormsModule,
     AppRoutingModule,
     ConfirmDialogModule,
-    MessagesModule
+    MessagesModule,
+    RatingModule,
+    PublicProfileModule
   ],
   providers: [AuthGuard,
   NgEventBus],

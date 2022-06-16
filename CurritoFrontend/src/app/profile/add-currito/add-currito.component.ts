@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { Anuncio, Categoria, Data, LoginRespuesta } from 'src/app/interfaces/interface';
-import { addAnuncioService } from 'src/app/services/addAnuncio.service';
 import { AnuncioService } from 'src/app/services/anuncio.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { RegisterService } from 'src/app/services/register.service';
@@ -16,7 +15,6 @@ import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 // Importo el archivo JSON 
 import listaProvincias from 'src/assets/json/provincias.json';
-// import imagen from 'src/assets/img/default.png';
 
 @Component({
   selector: 'app-add-currito',
@@ -82,7 +80,6 @@ export class AddCurritoComponent implements OnInit {
     private http: HttpClient,
     private router:Router,
     private categoriaService:CategoriaService,
-    private addAnuncioService: addAnuncioService,
     private anuncioService: AnuncioService,
     private messageService: MessageService, ) { }
     
@@ -103,10 +100,26 @@ export class AddCurritoComponent implements OnInit {
       this.titulo = "Nuevo Currito";
       this.botonRegistro ="Subir anuncio";
 
+      //Ordenamos la lista de provincias
+      this.listaProvincias = this.listaProvincias.sort(this.compareProvincias);
+
 
 
       this.mostrarCategorias();
     }
+
+    /**
+     * Metodo para ordenar json de provincias
+     * @param a primer parametro
+     * @param b segundo parametro
+     * @returns lista ordenada alfabeticamente
+     */
+    compareProvincias(a: any, b:any ):number {
+      //localeCompare lo utilizamos para ordenar cadenas teniendo en cuenta los acentos
+      return a.nm.localeCompare(b.nm);
+      
+    }
+    
 
     /**
      * Si accedemos a este componente a través de editar anuncio, rellenaremos los campos con el anuncio que nos hemos traido
@@ -122,7 +135,7 @@ export class AddCurritoComponent implements OnInit {
         id: this.anuncioEditar.id
         
       })
-
+      this.previsualizarImagen= this.getImage(this.anuncioEditar.file!);
       this.titulo= "Editar Currito";
       this.botonRegistro = "Actualizar anuncio"
     }
@@ -187,7 +200,6 @@ export class AddCurritoComponent implements OnInit {
           }
         }
 
-          console.log(this.currentFile)
         let respuesta: LoginRespuesta = {};
         let solucion: string;
         const anuncio = {
@@ -204,7 +216,8 @@ export class AddCurritoComponent implements OnInit {
         next:resp => {
           respuesta = resp;
           this.anuncioEditadoCorrectamente();
-          this.miFormulario.reset()
+          this.miFormulario.reset();
+          this.previsualizarImagen=""
         //  if(respuesta.jwt_token != null){
         //    localStorage.setItem('jwt', respuesta.jwt_token);
         //    this.router.navigate(['home']);
@@ -240,6 +253,8 @@ export class AddCurritoComponent implements OnInit {
           const file: File | null = this.selectedFiles.item(0);
           if (file) {
         this.currentFile = file;
+          }
+        }
         let respuesta: LoginRespuesta = {};
         let solucion: string;
         const anuncio = {
@@ -281,58 +296,10 @@ export class AddCurritoComponent implements OnInit {
           
           
         })
-      }
-      this.selectedFiles = undefined;
-      }
-        }
-      
-      // addCurrito1(): void {
-      //   // this.progress = 0;
-      //   console.log("dsa0000")
-      //   if (this.selectedFiles) {
-      //     console.log("dsa")
-  
-      //     const file: File | null = this.selectedFiles.item(0);
-      //     if (file) {
-      //       this.currentFile = file;
-      //       const anuncio = {
-      //         "titulo": this.miFormulario.get("titulo")?.value,
-      //         "categoria": this.miFormulario.get("categoria")?.value,
-      //         "precio": this.miFormulario.get("precio")?.value,
-      //         "tipoPrecio": this.miFormulario.get("tipoPrecio")?.value,
-      //         "descripcion": this.miFormulario.get("descripcion")?.value,
-      //         "ubicacion": this.miFormulario.get("ubicacion")?.value
-      //     }
-      //       this.anuncioService.addAnuncio(anuncio, this.currentFile).subscribe({
-      //         next: (event: any) => {
-      //           if (event.type === HttpEventType.UploadProgress) {
-      //             // this.progress = Math.round((100 * event.loaded) / event.total);
-      //           } else if (event instanceof HttpResponse) {
-      //             this.message = event.body.message;
-      //             let index = this.message.lastIndexOf(':') + 2;
-      //             localStorage.setItem('imgNAME', this.message.substring(index));
-      //             //console.log(this.message);
-      //             //this.fileInfos = this.uploadService.getFiles();
-      //             this.mostrar = true;
-      //             //console.log(this.currentFile)
-      //             //console.log(JSON.stringify(this.currentFile))  //devuelve {}
-      //           }
-      //         },
-      //         error: (err: any) => {
-      //           Swal.fire('Error', err.error.message, 'error');
-      //          // this.progress = 0;
-      //           if (err.error && err.error.message) {
-      //             this.message = err.error.message;
-      //           } else {
-      //             this.message = 'No se ha podido subir el archivo';
-      //           }
-      //           this.currentFile = undefined;
-      //         },
-      //       });
-      //     }
-      //     this.selectedFiles = undefined;
-      //   }
       // }
+      this.selectedFiles = undefined;
+      // }
+        }
       
       
       listaCategorias:Data={
@@ -354,7 +321,17 @@ export class AddCurritoComponent implements OnInit {
   
       //Mensajes
       anuncioEditadoCorrectamente() {
-        this.messageService.add({severity:'success', summary: 'Eliminado', detail: 'El anuncio ha sido añadido correctamente'});
+        this.messageService.add({severity:'success', summary: 'Añadido', detail: 'El anuncio ha sido añadido correctamente'});
       }
+
+    /**
+     * Método que llama a getImage del servicio y transforma un array de bytes en una url correspondiente a una imagen
+     * @param file 
+     * @returns 
+     */
+      getImage(file: Byte[]) {
+        return this.anuncioService.getImage(file);
+      }
+      
     }
     

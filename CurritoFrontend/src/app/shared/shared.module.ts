@@ -8,10 +8,10 @@ import { SubMenuComponent } from './sub-menu/sub-menu.component';
 import { FavoritesComponent } from '../profile/favorites/favorites.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { RouterModule } from '@angular/router';
-import { UploadImageComponent } from './upload-image/upload-image.component';
 import { CardAnuncioComponent } from './card-anuncio/card-anuncio.component';
 import { FormsModule } from '@angular/forms';
 import {BadgeModule} from 'primeng/badge';
+import {RatingModule} from 'primeng/rating';
 
 
 
@@ -22,22 +22,21 @@ import {BadgeModule} from 'primeng/badge';
     SearchComponent,
     HeaderComponent,
     SubMenuComponent,
-    UploadImageComponent,
-    CardAnuncioComponent    
+    CardAnuncioComponent   
   ],
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
-    BadgeModule
+    BadgeModule,
+    RatingModule
   ],
   exports:[
     SidebarComponent,
     FooterComponent,
     SearchComponent,
     HeaderComponent,
-    SubMenuComponent,
-    UploadImageComponent 
+    SubMenuComponent
   ]
 })
 export class SharedModule { }

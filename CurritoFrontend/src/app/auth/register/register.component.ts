@@ -88,7 +88,22 @@ constructor( private fb: FormBuilder,
       direccion: '',
       nacimietno: ''
     })
+
+    //Ordenamos la lista de provincias
+    this.listaProvincias = this.listaProvincias.sort(this.compareProvincias);
   }
+
+   /**
+     * Metodo para ordenar json de provincias
+     * @param a primer parametro
+     * @param b segundo parametro
+     * @returns lista ordenada alfabeticamente
+     */
+    compareProvincias(a: any, b:any ):number {
+      //localeCompare lo utilizamos para ordenar cadenas teniendo en cuenta los acentos
+      return a.nm.localeCompare(b.nm);
+      
+    }
   
 
   /**
@@ -121,7 +136,6 @@ constructor( private fb: FormBuilder,
   //   }
   //   recursiveFunc(formToInvestigate);
   //   console.log(invalidControls)
-  //   console.log(this.miFormulario.valid + "gfgdfgdgdfgfdgfdgdfg")
   //   return invalidControls;
   // }
 
@@ -154,10 +168,10 @@ constructor( private fb: FormBuilder,
     }
 
     crearCodigoVerificacion(){
-      console.log(this.miFormulario.get("direccion")?.value)
       this.registerService.verificarUsuario(this.miFormulario.get("email")?.value).subscribe({
         
         next:resp => {
+          //Dejo este console log, para no tener que entrar al correo para validarlo
           console.log(resp);
           this.codVerificacionCorrecto = resp;
        },
@@ -182,7 +196,6 @@ constructor( private fb: FormBuilder,
      * En caso de ser correcto se lanza el método para crear el usuario, en caso contrario se muestra un error
      */
     verificarUsuario(){
-      console.log(this.formCodigo.get("codigoVerificacionIntroducido")?.value)
       if(this.formCodigo.get("codigoVerificacionIntroducido")?.value == this.codVerificacionCorrecto){
         this.submitFormulario();
       }
@@ -191,7 +204,8 @@ constructor( private fb: FormBuilder,
           title: 'Codigo de verificacion incorrecto',
           text: 'Vuelve a intentarlo',
           icon: 'error',
-          confirmButtonText: 'Ok'
+          confirmButtonText: 'Ok',
+          
         })
       }
     }

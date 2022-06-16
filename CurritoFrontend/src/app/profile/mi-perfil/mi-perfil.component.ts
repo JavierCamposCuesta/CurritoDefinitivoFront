@@ -12,6 +12,9 @@ import { LoginService } from 'src/app/services/login.service';
 import { AnuncioService } from 'src/app/services/anuncio.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Byte } from '@angular/compiler/src/util';
+import { MessageService } from 'primeng/api';
+// Importo el archivo JSON 
+import listaProvincias from 'src/assets/json/provincias.json';
 
 @Component({
   selector: 'app-mi-perfil',
@@ -54,27 +57,36 @@ export class MiPerfilComponent implements OnInit {
     private registerService: RegisterService,
     private http: HttpClient,
     private router: Router,
-    private usuarioService: UsuarioService
-  ) { }
-
-  usuarioRegistrado: Usuario = {
-    email: '',
-    password: '',
-    nombre: '',
-    apellidos: '',
-    telefono: '',
-    fechaNacimiento: '',
-    ubicacion: '' 
-  };
+    private usuarioService: UsuarioService,
+    private messageService: MessageService
+    ) { }
+    
+  usuarioRegistrado: Usuario = {};
   selectedFiles?: FileList;
   currentFile?: any = 'NotSelected';
   previsualizarImagen: any = '';
-
+  listaProvincias: any = listaProvincias;
+  
   ngOnInit(): void {
     this.conseguirUsuarioRegistrado();
     window.scrollTo(0, 0);
 
     this.miFormularioDatosPerfil.markAllAsTouched();
+
+    //Ordenamos la lista de provincias
+      this.listaProvincias = this.listaProvincias.sort(this.compareProvincias);
+  }
+
+  /**
+     * Metodo para ordenar json de provincias
+     * @param a primer parametro
+     * @param b segundo parametro
+     * @returns lista ordenada alfabeticamente
+     */
+   compareProvincias(a: any, b:any ):number {
+    //localeCompare lo utilizamos para ordenar cadenas teniendo en cuenta los acentos
+    return a.nm.localeCompare(b.nm);
+    
   }
 
   /**
@@ -125,6 +137,7 @@ export class MiPerfilComponent implements OnInit {
           telefono: this.usuarioRegistrado.telefono,
           ubicacion: this.usuarioRegistrado.ubicacion,
         });
+        this.previsualizarImagen = this.getImage(this.usuarioRegistrado.fotoPerfil!);
       },
       error: (error) => { },
     });
@@ -196,16 +209,11 @@ export class MiPerfilComponent implements OnInit {
 
     this.usuarioService.updatePass(passEdit).subscribe({
       next: (resp) => {
-        location.reload();
+        this.conseguirUsuarioRegistrado();
+        this.mensajePassEditadoCorrectamente();
       },
       error: (err: any) => {
-        //  localStorage.removeItem('jwt');
-        Swal.fire({
-          title: 'Error al editar perfil',
-          text: 'Vuelve a intentarlo',
-          icon: 'error',
-          confirmButtonText: 'Ok',
-        });
+        this.errorPassEditado();
         this.currentFile = undefined;
       },
     });
@@ -236,24 +244,19 @@ export class MiPerfilComponent implements OnInit {
     };
 
     this.usuarioService
-      .updateProfile(userEditar, this.currentFile, this.usuarioRegistrado.email!)
+      .updateProfile(userEditar, this.currentFile)
       .subscribe({
         next: (resp) => {
           respuesta = resp;
-          // this.anuncioEditadoCorrectamente();
-          console.log(resp);
           this.miFormularioDatosPerfil.reset();
-          location.reload();
+          this.mensajePerfilEditadoCorrectamente();
+          
+          this.conseguirUsuarioRegistrado();
+
         },
         error: (err: any) => {
           solucion = 'error';
-          //  localStorage.removeItem('jwt');
-          Swal.fire({
-            title: 'Error al editar perfil',
-            text: 'Vuelve a intentarlo',
-            icon: 'error',
-            confirmButtonText: 'Ok',
-          });
+         this.errorPerfilEditado();
           this.currentFile = undefined;
         },
       });
@@ -261,4 +264,35 @@ export class MiPerfilComponent implements OnInit {
     this.selectedFiles = undefined;
     // }
   }
+
+/**
+ * Este método muestra el mensaje verde con el texto indicado si ha sido posible editar un perfil
+ */
+ mensajePerfilEditadoCorrectamente() {
+  this.messageService.add({severity:'success', summary: 'Actualizado', detail: 'Perfil actualizado correctamente'});
+}
+
+/**
+ * Este método muestra el mensaje rojo con el texto indicado si no ha sido posible editar un perfil
+ */
+ errorPerfilEditado() {
+  this.messageService.add({severity:'error', summary: 'Error', detail: 'No se ha podido actualizar el perfil'});
+}
+
+/**
+ * Este método muestra el mensaje verde con el texto indicado si ha sido posible actualizar una contraseña
+ */
+ mensajePassEditadoCorrectamente() {
+  this.messageService.add({severity:'success', summary: 'Actualizada', detail: 'Contraseña actualizada correctamente'});
+}
+
+/**
+ * Este método muestra el mensaje rojo con el texto indicado si no ha sido posible actualizar una contraseña
+ */
+ errorPassEditado() {
+  this.messageService.add({severity:'error', summary: 'Error', detail: 'No se ha podido actualizar la contraseña'});
+}
+
+
+
 }
