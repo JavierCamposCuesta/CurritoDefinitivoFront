@@ -68,9 +68,9 @@
           <i class="bi bi-image navy" alt="Click aquí para subir tu foto" title="Click aquí para subir tu foto"></i>
         </label> -->
         <input id="file-input" type="file" (change)="selectFile($event)" accept="image/*"/>
-        <img *ngIf="previsualizarImagen==''" class="img-fluid rounded-circle p-5 text-center" style="height: 250px; width: 250px;"
-        src="../../../assets/img/profileDefault.png" alt="foto de perfil" draggable="false">
-        <img *ngIf="previsualizarImagen!=''" class="img-fluid rounded-circle p-5 text-center" style="height: 250px; width: 250px;"
+        <img *ngIf="previsualizarImagen==null" class="img-fluid rounded-circle p-5 text-center" style="height: 250px; width: 250px;"
+        src="assets/img/profileDefault.png" alt="foto de perfil" draggable="false">
+        <img *ngIf="previsualizarImagen!=null" class="img-fluid rounded-circle p-5 text-center" style="height: 250px; width: 250px;"
           src={{previsualizarImagen}} alt="foto de perfil" draggable="false">
       </div>
 

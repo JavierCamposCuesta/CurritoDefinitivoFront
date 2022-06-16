@@ -61,13 +61,13 @@
               </div>
             </li>
             <li class="nav-item d-flex">
-              <i *ngIf="usuarioRegistrado.nombre == ''"
+              <!-- <i *ngIf="usuarioRegistrado.nombre == ''"
                 class="bi bi-person-circle"
                 style="color: white; font-size: 1.5em"
-              ></i>
+              ></i> -->
               <span *ngIf="usuarioRegistrado.nombre != ''">
                 <img *ngIf="this.usuarioRegistrado.fotoPerfil" class="img-fluid rounded-circle p-1" style="width: 50px; height: 50px; margin-top: -3px;" src={{getImage(this.usuarioRegistrado.fotoPerfil!)}} draggable="false">
-                <img *ngIf="!this.usuarioRegistrado.fotoPerfil" class="img-fluid rounded-circle p-1" style="width: 50px; height: 50px; margin-top: -3px; filter: contrast(0%) brightness(300%) ;" src="../../../assets/img/profileDefault.png" draggable="false">
+                <img *ngIf="!this.usuarioRegistrado.fotoPerfil" class="img-fluid rounded-circle p-1" style="width: 50px; height: 50px; margin-top: -3px; filter: contrast(0%) brightness(300%) ;" src="assets/img/profileDefault.png" draggable="false">
               </span>
               <a *ngIf="usuarioRegistrado.nombre != ''" class="nav-link text-white" aria-current="page" [routerLink]="['/profile/my-profile']">
                 <!-- Cuando el usuario está logueado mostramos su nombre y la primera letra de su apellido en mayúsculas, en vez de mi perfil -->

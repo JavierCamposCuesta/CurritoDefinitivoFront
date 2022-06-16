@@ -10,7 +10,7 @@
               <div class="col-6 text-start punteroBoton" [routerLink]="['/public-profile', anuncioDetalle.autorAnuncio?.id]">
                 <span class=" position-absolute">
                   <img *ngIf="anuncioDetalle.autorAnuncio?.fotoPerfil" class="img-fluid rounded-circle p-1" style="width: 45px; height: 45px; margin-top: -5px;" src={{getImage(anuncioDetalle.autorAnuncio?.fotoPerfil!)}} draggable="false">
-                  <img *ngIf="!anuncioDetalle.autorAnuncio?.fotoPerfil"  class="img-fluid rounded-circle p-1" style="width: 45px; height: 45px; margin-top: -5px;" src="../../../assets/img/profileDefault.png" draggable="false">
+                  <img *ngIf="!anuncioDetalle.autorAnuncio?.fotoPerfil"  class="img-fluid rounded-circle p-1" style="width: 45px; height: 45px; margin-top: -5px;" src="assets/img/profileDefault.png" draggable="false">
                 </span>
                 
                 
@@ -41,7 +41,7 @@
                     <div class="carousel-inner">
                       <div class="carousel-item active">
                        <img class="d-block ms-auto m-auto" *ngIf="getImage(anuncioDetalle.file!)== null"
-                       src="../../../assets/img/default.png"  style="max-height: 400px;" draggable="false" alt="Imagen no disponible">
+                       src="assets/img/default.png"  style="max-height: 400px;" draggable="false" alt="Imagen no disponible">
 
                         <img class="d-block m-auto" *ngIf="getImage(anuncioDetalle.file!)!= null" src={{getImage(anuncioDetalle.file!)}} draggable="false" style="max-height: 400px;" alt="Imagen no disponible">
                       </div>

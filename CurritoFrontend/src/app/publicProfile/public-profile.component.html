@@ -1,8 +1,8 @@
 <div class="w-100 row justify-content-center"> 
   <div class="w-75 row py-5 justify-content-center" style="background-color: rgba(226, 226, 226, 0.342)">
     <div class="col-12 col-md-4 col-lg-4">
-    <img src={{getImage(this.usuarioPerfil.fotoPerfil!)}} alt="" class="rounded-circle p-1 shadow" style="width: 300px; height: 300px;" draggable="false">
-    <img class="d-block ms-auto m-auto" *ngIf="getImage(usuarioPerfil.fotoPerfil!)== null" src="../../../assets/img/default.png"  style="max-height: 400px;" alt="Imagen no disponible" draggable="false">
+    <img *ngIf="getImage(usuarioPerfil.fotoPerfil!)" src={{getImage(this.usuarioPerfil.fotoPerfil!)}} alt="" class="rounded-circle p-1 shadow" style="width: 300px; height: 300px;" draggable="false">
+    <img class="rounded-circle p-1 shadow" *ngIf="getImage(usuarioPerfil.fotoPerfil!)==null" src="assets/img/profileDefault.png"  style="width: 300px; height: 300px;" alt="Imagen no disponible" draggable="false">
     </div>
     <div class="col-12 col-md-4 col-lg-4 my-5">
 

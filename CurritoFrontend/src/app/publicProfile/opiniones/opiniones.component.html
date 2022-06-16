@@ -7,7 +7,7 @@
             <div class="col-md-1 position-relative">
               <div class="img-anuncio position-absolute top-0 start-0" [routerLink]="['/anuncio-detalle', opinion.anuncio!.id]">
                 <span></span>
-                <img *ngIf="getImage(opinion.anuncio!.file!)== null"  src="../../../assets/img/default.png" class="img-fluid rounded-start p-3" alt="Imagen no disponible" draggable="false">
+                <img *ngIf="getImage(opinion.anuncio!.file!)== null"  src="assets/img/default.png" class="img-fluid rounded-start p-3" alt="Imagen no disponible" draggable="false">
                 <img *ngIf="getImage(opinion.anuncio!.file!)!= null" src={{getImage(opinion.anuncio!.file!)}} class="img-fluid rounded-start p-3" alt="Imagen no disponible" draggable="false">
               </div>
 
