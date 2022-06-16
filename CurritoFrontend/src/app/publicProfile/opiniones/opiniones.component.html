@@ -11,9 +11,9 @@
                 <img *ngIf="getImage(opinion.anuncio!.file!)!= null" src={{getImage(opinion.anuncio!.file!)}} class="img-fluid rounded-start p-3" alt="Imagen no disponible" draggable="false">
               </div>
 
-              <div class="img-profile position-absolute top-50 start-50" [routerLink]="['/public-profile', opinion.anuncio!.autorAnuncio!.id!]">
+              <div class="img-profile position-absolute top-50 start-50" [routerLink]="['/public-profile', opinion.usuarioComentador?.id!]">
                 <span></span>
-                <img class="img-fluid rounded-5 p-1" src={{getImage(opinion.anuncio!.autorAnuncio!.fotoPerfil!)}}>
+                <img class="img-fluid rounded-5 p-1" src={{getImage(opinion.usuarioComentador?.fotoPerfil!)}}>
               </div>
             </div>
             <div class="col-md-3">
