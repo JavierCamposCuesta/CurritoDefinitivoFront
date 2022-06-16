@@ -39,4 +39,8 @@ class="p-5 card-group d-flex justify-content-evenly row row-cols-1 row-cols-sm-2
 
 
 </div>
+  <!-- Mensaje que se mostrará si no hay ninguna opinon -->
+  <div *ngIf="anunciosOfertados.length == 0" class="w-100 text-center navy mt-5">
+    <p>Aún no tiene anuncios ofertados</p>
+</div>
 </div>
