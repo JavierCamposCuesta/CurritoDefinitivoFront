@@ -31,7 +31,8 @@ export class AddCurritoComponent implements OnInit {
   @Input() edit=false;
 
   /**
-   * Con esto conseguimos el anuncio que queremos editar, el cual lleva consigo el id del anuncio
+   * Con esto conseguimos el anuncio que queremos editar, 
+   * el cual lleva consigo el id del anuncio
    */
   @Input() anuncioEditar:Anuncio= {};
   titulo:string='';
@@ -122,7 +123,8 @@ export class AddCurritoComponent implements OnInit {
     
 
     /**
-     * Si accedemos a este componente a través de editar anuncio, rellenaremos los campos con el anuncio que nos hemos traido
+     * Si accedemos a este componente a través de editar anuncio, 
+     * rellenaremos los campos con el anuncio que nos hemos traido
      */
     ngOnChanges(): void{
       this.miFormulario.reset({

@@ -157,7 +157,7 @@ export class AnuncioService {
       formData.append('emailSolicitante', emailSolicitante);
       formData.append('textoComentario', textoComentario);
       formData.append('puntuacionEstrellas', puntuacionEstrellas.toString());
-        return this.http.put(url, formData, {headers});
+        return this.http.post(url, formData, {headers});
     }
   
 

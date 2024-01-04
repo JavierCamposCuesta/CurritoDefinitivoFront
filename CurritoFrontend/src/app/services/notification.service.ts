@@ -26,28 +26,24 @@ import {Comentario, Usuario } from '../interfaces/interface';
         .set('Authorization', `Bearer ${localStorage.getItem('jwt')}` || '' );
     }
 
-    /**
+   /**
    * Método para pedir todas las notificaciones
    * @returns lista con todas las notificiaciones
    */
      cargarNotificaciones(usuario: Usuario){
         const url = `${this.baseUrl}/profile/notification`;
-    
         const headers = this.cargarHeaders();
           return this.http.get<Comentario[]>(url, {headers});
-        
       }
 
-      /**
+   /**
    * Método para pedir todas las notificaciones
    * @returns lista con todas las notificiaciones
    */
        conseguirComentariosPendientes(){
       const url = `${this.baseUrl}/profile/opiniones-pendientes`;
-  
       const headers = this.cargarHeaders();
         return this.http.get<Comentario[]>(url, {headers});
-      
     }
 
       

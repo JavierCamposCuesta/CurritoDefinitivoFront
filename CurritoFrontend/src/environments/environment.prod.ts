@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
- baseUrl: 'https://currito-postgre.herokuapp.com'
+ baseUrl: 'https://curritoback.onrender.com'
 };
